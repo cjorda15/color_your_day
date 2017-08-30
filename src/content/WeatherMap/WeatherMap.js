@@ -13,8 +13,14 @@ class WeatherMap extends Component {
     }
   };
 
+  componentWillReceiveProps(){
+    console.log("!")
+    this.setState({lat:this.props.lat,lng: this.props.lng})
+  }
+
   componentDidMount() {
     const { lat, lng, zoom } = this.state
+    // const lat =
     let map = new mapboxgl.Map({
       container: this.refs.map,
       style: 'mapbox://styles/mapbox/basic-v9',
@@ -23,7 +29,8 @@ class WeatherMap extends Component {
     });
 
     map.on('load', function() {
-      map.loadImage("https://cdn.dribbble.com/assets/icon-shotstat-like-6a1e9e9db48b9b788639f05a658379b7bb027a75d256127f812bf9392664396f.png", function(error, image) {
+      const imgSrc = 'https://cdn.dribbble.com/assets/icon-shotstat-like-6a1e9e9db48b9b788639f05a658379b7bb027a75d256127f812bf9392664396f.png'
+      map.loadImage(imgSrc, function(error, image) {
         if(error) throw error;
         map.addImage('compass', image);
         map.addLayer({
@@ -49,6 +56,8 @@ class WeatherMap extends Component {
         });
       });
     });
+    
+    map.addControl(new mapboxgl.NavigationControl());
 
     map.on('move', () => {
       const { lat, lng } = map.getCenter();

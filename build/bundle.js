@@ -24794,10 +24794,15 @@ var _weather = __webpack_require__(228);
 
 var _weather2 = _interopRequireDefault(_weather);
 
+var _location = __webpack_require__(612);
+
+var _location2 = _interopRequireDefault(_location);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var rootReducer = (0, _redux.combineReducers)({
-  weather: _weather2.default
+  weather: _weather2.default,
+  location: _location2.default
 });
 
 exports.default = rootReducer;
@@ -24855,6 +24860,10 @@ var _WeatherMapContainer = __webpack_require__(393);
 
 var _WeatherMapContainer2 = _interopRequireDefault(_WeatherMapContainer);
 
+var _WeatherInfo = __webpack_require__(611);
+
+var _WeatherInfo2 = _interopRequireDefault(_WeatherInfo);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -24874,7 +24883,9 @@ var App = function (_Component) {
     var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
     _this.state = {
-      loading: false
+      loading: false,
+      lat: 40.016457,
+      lng: -105.285884
     };
     return _this;
   }
@@ -24896,6 +24907,7 @@ var App = function (_Component) {
             lat = _data$results$0$geome.lat,
             lng = _data$results$0$geome.lng;
 
+        _this2.setState({ lat: lat, lng: lng });
         fetch(url + '/' + "890aa95a8628c31f30f1c9540168cbdc" + '/' + lat + ',' + lng).then(function (blob) {
           return blob.json();
         }).then(function (data) {
@@ -24918,7 +24930,8 @@ var App = function (_Component) {
         ),
         _react2.default.createElement(_InputLocation2.default, { handleCall: this.apiCall.bind(this) }),
         _react2.default.createElement(_WeatherAnimationContainer2.default, { shouldAnimate: !this.state.loading }),
-        _react2.default.createElement(_WeatherMapContainer2.default, null)
+        _react2.default.createElement(_WeatherInfo2.default, { weather: this.props.weather }),
+        _react2.default.createElement(_WeatherMapContainer2.default, { lat: this.state.lat, lng: this.state.lng })
       );
     }
   }]);
@@ -57371,6 +57384,12 @@ var WeatherMap = function (_Component) {
   }
 
   _createClass(WeatherMap, [{
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps() {
+      console.log("!");
+      this.setState({ lat: this.props.lat, lng: this.props.lng });
+    }
+  }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
       var _this2 = this;
@@ -57379,6 +57398,7 @@ var WeatherMap = function (_Component) {
           lat = _state.lat,
           lng = _state.lng,
           zoom = _state.zoom;
+      // const lat =
 
       var map = new _mapboxGl2.default.Map({
         container: this.refs.map,
@@ -57388,7 +57408,8 @@ var WeatherMap = function (_Component) {
       });
 
       map.on('load', function () {
-        map.loadImage("https://cdn.dribbble.com/assets/icon-shotstat-like-6a1e9e9db48b9b788639f05a658379b7bb027a75d256127f812bf9392664396f.png", function (error, image) {
+        var imgSrc = 'https://cdn.dribbble.com/assets/icon-shotstat-like-6a1e9e9db48b9b788639f05a658379b7bb027a75d256127f812bf9392664396f.png';
+        map.loadImage(imgSrc, function (error, image) {
           if (error) throw error;
           map.addImage('compass', image);
           map.addLayer({
@@ -57414,6 +57435,8 @@ var WeatherMap = function (_Component) {
           });
         });
       });
+
+      map.addControl(new _mapboxGl2.default.NavigationControl());
 
       map.on('move', function () {
         var _map$getCenter = map.getCenter(),
@@ -93441,6 +93464,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     handleData: function handleData(input) {
       dispatch((0, _actions.updateWeather)(input));
+    },
+    handleLocation: function handleLocation(input) {
+      dispatch((0, _actions.updateLocation)(input));
     }
   };
 };
@@ -93460,6 +93486,13 @@ Object.defineProperty(exports, "__esModule", {
 var updateWeather = exports.updateWeather = function updateWeather(input) {
   return {
     type: "UPDATE_WEATHER",
+    payload: input
+  };
+};
+
+var updateLocation = exports.updateLocation = function updateLocation(input) {
+  return {
+    type: "UPDATE_LOCATION",
     payload: input
   };
 };
@@ -93491,6 +93524,71 @@ exports.push([module.i, ".error-message{\n  background: rgba(0,0,0,.9);\n  color
 
 // exports
 
+
+/***/ }),
+/* 610 */,
+/* 611 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(32);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var WeatherInfo = function WeatherInfo(_ref) {
+  var weather = _ref.weather;
+
+  return _react2.default.createElement(
+    "div",
+    { className: "weather-info-container" },
+    _react2.default.createElement(
+      "p",
+      null,
+      " ",
+      weather ? "Currently " + weather.currently.summary : "loading"
+    ),
+    _react2.default.createElement(
+      "p",
+      null,
+      " ",
+      weather ? "Later " + weather.hourly.summary : "weather"
+    )
+  );
+};
+
+exports.default = WeatherInfo;
+
+/***/ }),
+/* 612 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var location = function location() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+  var action = arguments[1];
+
+  switch (action.type) {
+    case "UPDATE_LOCATION":
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
+exports.default = location;
 
 /***/ })
 /******/ ]);

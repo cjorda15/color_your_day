@@ -4,3 +4,10 @@ export const updateWeather = (input) => {
     payload:input
   }
 }
+
+export const updateLocation = (input) => {
+  return {
+    type:"UPDATE_LOCATION",
+    payload:input
+  }
+}

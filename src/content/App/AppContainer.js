@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { updateWeather } from '../../actions'
+import { updateWeather, updateLocation } from '../../actions'
 import App from './App'
 const mapStateToProps = (state) => {
   return {
@@ -10,7 +10,10 @@ const mapDispatchToProps = (dispatch) => {
   return {
     handleData: (input) => {
       dispatch(updateWeather(input))
-  }
+  },
+    handleLocation: (input) => {
+      dispatch(updateLocation(input))
+    }
  }
 }
 
