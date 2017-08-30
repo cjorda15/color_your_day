@@ -1,6 +1,21 @@
 import React, { Component } from 'react'
 import InputLocation from './InputLocation'
-const geocoder = require('geocoder');
+import { connect } from 'react-redux'
+import { updateWeather } from '../actions'
+import WeatherAnimation from './WeatherAnimation';
+const geocoder = require('geocoder')
+const mapStateToProps = (state) => {
+  return {
+    state:state
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    handleData: (input) => {
+      dispatch(updateWeather(input))
+  }
+ }
+}
 
 class App extends Component{
   constructor(props){
@@ -11,19 +26,23 @@ class App extends Component{
   }
 
   apiCall(city,state){
-    geocoder.geocode(`${city}, ${state}`, function ( err, data ) {
+    geocoder.geocode(`${city}, ${state}`, ( err, data ) => {
       const {lat,lng} = data.results[0].geometry.location
       fetch(`https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/${API_KEY}/${lat},${lng}`)
       .then(blob => blob.json())
-      .then(data => console.log(data))
+      .then(data => this.props.handleData(data))
+      .catch(err => console.log(err))
   })
 }
 
   render(){
     return(
-      <InputLocation handleCall={this.apiCall.bind(this)}/>
+      <div>
+        <InputLocation handleCall={this.apiCall.bind(this)}/>
+        <WeatherAnimation/>
+      </div>
     )
   }
 }
 
-export default App
+export default connect(mapStateToProps,mapDispatchToProps) (App)

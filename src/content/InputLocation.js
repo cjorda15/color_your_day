@@ -5,7 +5,7 @@ class InputLocation extends Component{
     super(props)
     this.state = {
       city:"",
-      state:""
+      state:"",
     }
   }
 
@@ -15,9 +15,10 @@ class InputLocation extends Component{
 
   handleSubmit(e){
     e.preventDefault()
-    //need to handle if no input or incorrect and show error
+    //handle errors here with showing error messages
     const {city,state} = this.state
     this.props.handleCall(city,state)
+    this.setState({city:"",state:""})
   }
 
   render(){
