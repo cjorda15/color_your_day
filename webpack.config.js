@@ -1,4 +1,6 @@
 const path = require('path')
+const webpack = require('webpack')
+require('dotenv').config()
 
 module.exports = {
   entry:["./src/index.js"],
@@ -23,5 +25,11 @@ module.exports = {
     net: "empty",
     tls: "empty",
     fs:  "empty"
-  }
+  },
+  plugins: [
+  new webpack.DefinePlugin({
+    'API_KEY': JSON.stringify(process.env.API_KEY),
+  })
+]
+
 }

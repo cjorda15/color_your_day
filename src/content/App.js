@@ -13,7 +13,8 @@ class App extends Component{
   apiCall(city,state){
     geocoder.geocode(`${city}, ${state}`, function ( err, data ) {
       console.log(data)
-      console.log("woo")
+      console.log(API_KEY,"!!!")
+      console.log("woodd")
   })
 }
 
