@@ -12,9 +12,10 @@ class App extends Component{
 
   apiCall(city,state){
     geocoder.geocode(`${city}, ${state}`, function ( err, data ) {
-      console.log(data)
-      console.log(API_KEY,"!!!")
-      console.log("woodd")
+      const {lat,lng} = data.results[0].geometry.location
+      fetch(`https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/${API_KEY}/${lat},${lng}`)
+      .then(blob => blob.json())
+      .then(data => console.log(data))
   })
 }
 

@@ -54178,9 +54178,15 @@ var App = function (_Component) {
     key: 'apiCall',
     value: function apiCall(city, state) {
       geocoder.geocode(city + ', ' + state, function (err, data) {
-        console.log(data);
-        console.log("890aa95a8628c31f30f1c9540168cbdc", "!!!");
-        console.log("woodd");
+        var _data$results$0$geome = data.results[0].geometry.location,
+            lat = _data$results$0$geome.lat,
+            lng = _data$results$0$geome.lng;
+
+        fetch('https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/' + "890aa95a8628c31f30f1c9540168cbdc" + '/' + lat + ',' + lng).then(function (blob) {
+          return blob.json();
+        }).then(function (data) {
+          return console.log(data);
+        });
       });
     }
   }, {
