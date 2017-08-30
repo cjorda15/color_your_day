@@ -8,20 +8,24 @@ class WeatherAnimation extends Component{
       icon: "RAIN",
       color: 'goldenrod',
       size: 252,
-      animate: true
+      animate: this.props.shouldAnimate
     }
   }
-  componentWillReceiveProps(){
-    console.log(this.props,"!!!!!")
-  }
-  ///// receives forecaest
-  /// depending on it, will change icon/color
-  /// should accept a dispatch that will lead to the logic
+
+  updateAnimationValues(){
+    if(this.props.weather){
+      return this.props.weather.currently.icon.toUpperCase().split('')
+             .map(char => char=="-"?"_":char).join('')
+    }
+    return "RAIN"
+    }
+
 
     render(){
+      this.updateAnimationValues()
       return(
         <ReactAnimatedWeather
-        icon={this.state.icon}
+        icon={this.updateAnimationValues()}
         color={this.state.color}
         size={this.state.size}
         animate={this.state.animate}

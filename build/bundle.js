@@ -24874,7 +24874,7 @@ var App = function (_Component) {
     var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
     _this.state = {
-      loading: false ///not in use
+      loading: false
     };
     return _this;
   }
@@ -24889,6 +24889,7 @@ var App = function (_Component) {
     value: function apiCall(city, state) {
       var _this2 = this;
 
+      this.setState({ loading: true });
       geocoder.geocode(city + ', ' + state, function (err, data) {
         var url = 'https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/';
         var _data$results$0$geome = data.results[0].geometry.location,
@@ -24899,7 +24900,7 @@ var App = function (_Component) {
           return blob.json();
         }).then(function (data) {
           return _this2.props.handleData(data);
-        }).catch(function (err) {
+        }, _this2.setState({ loading: false })).catch(function (err) {
           return console.log(err);
         });
       });
@@ -24916,7 +24917,7 @@ var App = function (_Component) {
           'color your day'
         ),
         _react2.default.createElement(_InputLocation2.default, { handleCall: this.apiCall.bind(this) }),
-        _react2.default.createElement(_WeatherAnimationContainer2.default, null),
+        _react2.default.createElement(_WeatherAnimationContainer2.default, { shouldAnimate: !this.state.loading }),
         _react2.default.createElement(_WeatherMapContainer2.default, null)
       );
     }
@@ -57252,25 +57253,27 @@ var WeatherAnimation = function (_Component) {
       icon: "RAIN",
       color: 'goldenrod',
       size: 252,
-      animate: true
+      animate: _this.props.shouldAnimate
     };
     return _this;
   }
 
   _createClass(WeatherAnimation, [{
-    key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps() {
-      console.log(this.props, "!!!!!");
+    key: 'updateAnimationValues',
+    value: function updateAnimationValues() {
+      if (this.props.weather) {
+        return this.props.weather.currently.icon.toUpperCase().split('').map(function (char) {
+          return char == "-" ? "_" : char;
+        }).join('');
+      }
+      return "RAIN";
     }
-    ///// receives forecaest
-    /// depending on it, will change icon/color
-    /// should accept a dispatch that will lead to the logic
-
   }, {
     key: 'render',
     value: function render() {
+      this.updateAnimationValues();
       return _react2.default.createElement(_reactAnimatedWeather2.default, {
-        icon: this.state.icon,
+        icon: this.updateAnimationValues(),
         color: this.state.color,
         size: this.state.size,
         animate: this.state.animate
