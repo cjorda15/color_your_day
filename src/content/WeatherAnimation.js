@@ -2,9 +2,9 @@ import React from 'react';
 import ReactAnimatedWeather from 'react-animated-weather';
 
 const defaults = {
-  icon: 'CLEAR_DAY',
+  icon: "RAIN",
   color: 'goldenrod',
-  size: 512,
+  size: 252,
   animate: true
 };
 

@@ -38,8 +38,9 @@ class App extends Component{
   render(){
     return(
       <div>
-        <InputLocation handleCall={this.apiCall.bind(this)}/>
+        <h3>color your day</h3>
         <WeatherAnimation/>
+        <InputLocation handleCall={this.apiCall.bind(this)}/>
       </div>
     )
   }
