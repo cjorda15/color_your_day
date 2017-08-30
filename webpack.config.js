@@ -32,7 +32,8 @@ module.exports = {
   },
   plugins: [
   new webpack.DefinePlugin({
-    'API_KEY': JSON.stringify(process.env.API_KEY),
+    'MAP_API_KEY': JSON.stringify(process.env.MAP_API_KEY),
+    'WEATHER_API_KEY':JSON.stringify(process.env.WEATHER_API_KEY)
   })
 ]
 

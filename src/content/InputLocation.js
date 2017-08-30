@@ -6,6 +6,7 @@ class InputLocation extends Component{
     this.state = {
       city:"",
       state:"",
+      showError:false
     }
   }
 
@@ -13,12 +14,26 @@ class InputLocation extends Component{
      this.setState({[type]:input})
   }
 
+  handleError(){
+    this.setState({showError:true})
+    setTimeout(()=>{this.setState({showError:false})},2000)
+  }
+
   handleSubmit(e){
     e.preventDefault()
-    //handle errors here with showing error messages
     const {city,state} = this.state
+    if(!city || !state){
+      this.handleError()
+      return
+    }
     this.props.handleCall(city,state)
     this.setState({city:"",state:""})
+  }
+
+  errorMessage(){
+    if(this.state.showError){
+     return <div className="error-message">error, need at least a state or a city</div>
+   }
   }
 
   render(){
@@ -37,8 +52,9 @@ class InputLocation extends Component{
           value={this.state.state}
           onChange={(e)=>{this.handleInput(e.target.value,"state")}}
             />
-            <button onClick={(e)=>{this.handleSubmit(e)}}>submit</button>
-            </form>
+        <button onClick={(e)=>{this.handleSubmit(e)}}>submit</button>
+        </form>
+        {this.errorMessage()}
       </div>
     )
   }

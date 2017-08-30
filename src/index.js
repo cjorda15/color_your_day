@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from "react-redux"
 import { configureStore } from './configStore'
-import App from './content/App'
+import App from './content/App/AppContainer'
 import './styles/main.scss';
 
 const store = configureStore()

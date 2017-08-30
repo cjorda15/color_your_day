@@ -22,10 +22,13 @@
     "express": "^4.15.4",
     "geocoder": "^0.2.3",
     "json-loader": "^0.5.7",
+    "leaflet": "^1.2.0",
+    "mapbox-gl": "^0.39.1",
     "path": "^0.12.7",
     "react": "^15.6.1",
     "react-animated-weather": "^1.0.3",
     "react-dom": "^15.6.1",
+    "react-leaflet": "^1.6.4",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "style-loader": "^0.18.2"
