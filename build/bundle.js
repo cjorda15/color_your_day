@@ -56659,12 +56659,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    weather: state.weather
+    weather: state.weather,
+    location: state.location
   };
 };
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    handleData: function handleData(input) {
+    handleUpdateWeather: function handleUpdateWeather(input) {
       dispatch((0, _actions.updateWeather)(input));
     },
     handleLocation: function handleLocation(input) {
@@ -56696,13 +56697,13 @@ var _InputLocation = __webpack_require__(390);
 
 var _InputLocation2 = _interopRequireDefault(_InputLocation);
 
-var _WeatherAnimationContainer = __webpack_require__(391);
+var _WeatherAnimation = __webpack_require__(615);
 
-var _WeatherAnimationContainer2 = _interopRequireDefault(_WeatherAnimationContainer);
+var _WeatherAnimation2 = _interopRequireDefault(_WeatherAnimation);
 
-var _WeatherMapContainer = __webpack_require__(396);
+var _WeatherMap = __webpack_require__(614);
 
-var _WeatherMapContainer2 = _interopRequireDefault(_WeatherMapContainer);
+var _WeatherMap2 = _interopRequireDefault(_WeatherMap);
 
 var _WeatherInfo = __webpack_require__(399);
 
@@ -56737,29 +56738,38 @@ var App = function (_Component) {
   _createClass(App, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      this.apiCall("Boulder", "Colorado");
+      var _state = this.state,
+          lat = _state.lat,
+          lng = _state.lng;
+
+      this.apiCall(lat, lng);
     }
   }, {
     key: 'apiCall',
-    value: function apiCall(city, state) {
+    value: function apiCall(lat, lng) {
       var _this2 = this;
 
-      this.setState({ loading: true });
-      geocoder.geocode(city + ', ' + state, function (err, data) {
+      console.log("!!!!");
+      var url = 'https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/';
+      this.setState({ lat: lat, lng: lng, loading: true });
+      fetch(url + '/' + "890aa95a8628c31f30f1c9540168cbdc" + '/' + lat + ',' + lng).then(function (blob) {
+        return blob.json();
+      }).then(function (data) {
+        _this2.props.handleUpdateWeather(data), _this2.getLocation(data.latitude, data.longitude);
+        _this2.setState({ loading: false });
+      }).catch(function (err) {
+        return console.log(err);
+      });
+    }
+  }, {
+    key: 'getLocation',
+    value: function getLocation(lat, lng) {
+      var _this3 = this;
 
-        var url = 'https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/';
-        var _data$results$0$geome = data.results[0].geometry.location,
-            lat = _data$results$0$geome.lat,
-            lng = _data$results$0$geome.lng;
+      geocoder.reverseGeocode(lat, lng, function (err, data) {
+        var formatted_address = data.results[0].formatted_address;
 
-        _this2.setState({ lat: lat, lng: lng });
-        fetch(url + '/' + "890aa95a8628c31f30f1c9540168cbdc" + '/' + lat + ',' + lng).then(function (blob) {
-          return blob.json();
-        }).then(function (data) {
-          return _this2.props.handleData(data);
-        }, _this2.setState({ loading: false })).catch(function (err) {
-          return console.log(err);
-        });
+        _this3.props.handleLocation(formatted_address);
       });
     }
   }, {
@@ -56812,13 +56822,26 @@ var App = function (_Component) {
             'day'
           )
         ),
-        _react2.default.createElement(_WeatherInfo2.default, { weather: this.props.weather }),
+        _react2.default.createElement(
+          'p',
+          { id: 'location-content', className: 'title-greeting' },
+          this.props.location ? this.props.location : null
+        ),
+        _react2.default.createElement(_WeatherInfo2.default, {
+          weather: this.props.weather
+        }),
         _react2.default.createElement(
           'div',
           { id: 'central-container' },
-          _react2.default.createElement(_WeatherAnimationContainer2.default, { shouldAnimate: !this.state.loading })
+          _react2.default.createElement(_WeatherAnimation2.default, {
+            shouldAnimate: !this.state.loading,
+            weather: this.props.weather
+          })
         ),
-        _react2.default.createElement(_WeatherMapContainer2.default, { id: 'weather-map', lat: this.state.lat, lng: this.state.lng })
+        _react2.default.createElement(_WeatherMap2.default, {
+          id: 'weather-map',
+          handleApiCall: this.apiCall.bind(this)
+        })
       );
     }
   }]);
@@ -56958,107 +56981,8 @@ var InputLocation = function (_Component) {
 exports.default = InputLocation;
 
 /***/ }),
-/* 391 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _reactRedux = __webpack_require__(80);
-
-var _WeatherAnimation = __webpack_require__(392);
-
-var _WeatherAnimation2 = _interopRequireDefault(_WeatherAnimation);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var mapStateToProps = function mapStateToProps(state) {
-  return {
-    weather: state.weather
-  };
-};
-
-exports.default = (0, _reactRedux.connect)(mapStateToProps)(_WeatherAnimation2.default);
-
-/***/ }),
-/* 392 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(28);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactAnimatedWeather = __webpack_require__(393);
-
-var _reactAnimatedWeather2 = _interopRequireDefault(_reactAnimatedWeather);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var WeatherAnimation = function (_Component) {
-  _inherits(WeatherAnimation, _Component);
-
-  function WeatherAnimation(props) {
-    _classCallCheck(this, WeatherAnimation);
-
-    var _this = _possibleConstructorReturn(this, (WeatherAnimation.__proto__ || Object.getPrototypeOf(WeatherAnimation)).call(this, props));
-
-    _this.state = {
-      icon: "RAIN",
-      color: 'goldenrod',
-      size: 152,
-      animate: _this.props.shouldAnimate
-    };
-    return _this;
-  }
-
-  _createClass(WeatherAnimation, [{
-    key: 'updateAnimationValues',
-    value: function updateAnimationValues() {
-      if (this.props.weather) {
-        return this.props.weather.currently.icon.toUpperCase().split('').map(function (char) {
-          return char == "-" ? "_" : char;
-        }).join('');
-      }
-      return "RAIN";
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      this.updateAnimationValues();
-      return _react2.default.createElement(_reactAnimatedWeather2.default, { id: 'weather-animation',
-        icon: this.updateAnimationValues(),
-        color: this.state.color,
-        size: this.state.size,
-        animate: this.state.animate
-      });
-    }
-  }]);
-
-  return WeatherAnimation;
-}(_react.Component);
-
-exports.default = WeatherAnimation;
-
-/***/ }),
+/* 391 */,
+/* 392 */,
 /* 393 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -57835,199 +57759,8 @@ exports.default = skycons;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11)))
 
 /***/ }),
-/* 396 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _reactRedux = __webpack_require__(80);
-
-var _WeatherMap = __webpack_require__(397);
-
-var _WeatherMap2 = _interopRequireDefault(_WeatherMap);
-
-var _actions = __webpack_require__(178);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var mapStateToProps = function mapStateToProps(state) {
-  return {
-    state: state
-  };
-};
-
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {
-    handleData: function handleData(input) {
-      dispatch((0, _actions.updateWeather)(input));
-    }
-  };
-};
-
-exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_WeatherMap2.default);
-
-/***/ }),
-/* 397 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(28);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _mapboxGl = __webpack_require__(398);
-
-var _mapboxGl2 = _interopRequireDefault(_mapboxGl);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-_mapboxGl2.default.accessToken = "pk.eyJ1IjoiY3JvYmVydGpvcmRhbiIsImEiOiJjajZ5cmNsejEwNndhMzRtbDl5ZnBqdnFmIn0.qO37QqTDIwpr4uq30TKd8A";
-
-var WeatherMap = function (_Component) {
-  _inherits(WeatherMap, _Component);
-
-  function WeatherMap(props) {
-    _classCallCheck(this, WeatherMap);
-
-    var _this = _possibleConstructorReturn(this, (WeatherMap.__proto__ || Object.getPrototypeOf(WeatherMap)).call(this, props));
-
-    _this.state = {
-      lat: 40.016457,
-      lng: -105.285884,
-      zoom: 10
-    };
-    return _this;
-  }
-
-  _createClass(WeatherMap, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      var _this2 = this;
-
-      var _state = this.state,
-          lat = _state.lat,
-          lng = _state.lng,
-          zoom = _state.zoom;
-
-      var map = new _mapboxGl2.default.Map({
-        container: this.refs.map,
-        style: 'mapbox://styles/mapbox/dark-v9',
-        center: [lng, lat],
-        zoom: zoom
-      });
-
-      map.addControl(new _mapboxGl2.default.NavigationControl());
-      map.addControl(new MapboxGeocoder({
-        accessToken: _mapboxGl2.default.accessToken
-      }));
-      // //
-      // const geoInput = document.querySelector('.suggestions li')
-      // geoInput.addEventListener('click',()=> {
-      //   console.log("WOO")
-      // })
-      //
-      // console.log(geoInput)
-
-      map.on('load', function () {
-        var imgSrc = 'https://cdn.dribbble.com/assets/icon-shotstat-like-6a1e9e9db48b9b788639f05a658379b7bb027a75d256127f812bf9392664396f.png';
-        map.loadImage(imgSrc, function (error, image) {
-          if (error) throw error;
-          map.addImage('compass', image);
-          map.addLayer({
-            "id": "points",
-            "type": "symbol",
-            "source": {
-              "type": "geojson",
-              "data": {
-                "type": "FeatureCollection",
-                "features": [{
-                  "type": "Feature",
-                  "geometry": {
-                    "type": "Point",
-                    "coordinates": [lng, lat]
-                  }
-                }]
-              }
-            },
-            "layout": {
-              "icon-image": "compass",
-              "icon-size": .6
-            }
-          });
-        });
-      });
-
-      map.on('move', function () {
-        var _map$getCenter = map.getCenter(),
-            lat = _map$getCenter.lat,
-            lng = _map$getCenter.lng;
-
-        _this2.setState({
-          lat: lat.toFixed(3),
-          lng: lng.toFixed(3),
-          zoom: map.getZoom().toFixed(1)
-        });
-      });
-
-      map.on('click', function (e) {
-        var _e$lngLat = e.lngLat,
-            lat = _e$lngLat.lat,
-            lng = _e$lngLat.lng;
-
-        var url = 'https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/';
-        fetch(url + '/' + "890aa95a8628c31f30f1c9540168cbdc" + '/' + lat + ',' + lng).then(function (blob) {
-          return blob.json();
-        }).then(function (data) {
-          return _this2.props.handleData(data);
-        }).catch(function (err) {
-          return console.log(err);
-        });
-        map.flyTo({ center: e.lngLat, zoom: 10 });
-      });
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'section',
-        { className: 'weather-map-container' },
-        _react2.default.createElement(
-          'div',
-          { id: 'map-tip' },
-          ' click on map to get local forecast'
-        ),
-        _react2.default.createElement('div', { ref: 'map', className: 'Map-wrapper' })
-      );
-    }
-  }]);
-
-  return WeatherMap;
-}(_react.Component);
-
-;
-
-exports.default = WeatherMap;
-
-/***/ }),
+/* 396 */,
+/* 397 */,
 /* 398 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -93189,7 +92922,7 @@ exports = module.exports = __webpack_require__(71)(undefined);
 
 
 // module
-exports.push([module.i, ".app-container{\n  height: 100%;\n}\n\n#central-container{\n  height: 235px;\n  position: relative;\n}\n\n#central-container canvas{\n  animation: icons 60s infinite;\n  position: relative;\n  top:-20px;\n}\n\n.title-greeting{\n  font-size: 42px;\n  text-align: center;\n}\n\n#title-char-1{\n  color:#7CFC00;\n}\n\n#title-char-2{\n  color:#DB7093;\n}\n\n#title-char-3{\n  color:#87CEFA;\n}\n\n#title-char-4{\n  color:#FFA500;\n}\n\n#title-char-5{\n  color:#DA70D6;\n}\n\n#title-word-2{\n  color:#6A5ACD;\n}\n\n#title-word-3{\n  color:#ADFF2F;\n}\n\n.mapboxgl-ctrl-top-right{\n  display: flex;\n  justify-content: space-between;\n  width: 100%;\n}\n\n.mapboxgl-ctrl-geocoder{\n  height: 40px;\n}\n\n#map-tip{\n  background: #fff;\n  border-radius: 20px;\n  bottom: 0;\n  color: red;\n  padding: 3px;\n  position: absolute;\n  left: 25%;\n  z-index: 5;\n}\n\n.weather-map-container{\n  position: relative;\n}\n\n@keyframes icons {\n  0%   {\n        left: 10%;\n       }\n  50%  {\n        left:60%;\n      }\n  100% {\n        left: 10%;\n    }\n}\n", ""]);
+exports.push([module.i, ".app-container{\n  height: 100%;\n}\n\n#central-container{\n  height: 235px;\n  position: relative;\n}\n\n#central-container canvas{\n  animation: icons 60s infinite;\n  position: relative;\n  top:-20px;\n}\n\n.title-greeting{\n  font-size: 42px;\n  text-align: center;\n}\n\n#title-char-1{\n  color:#7CFC00;\n}\n\n#title-char-2{\n  color:#DB7093;\n}\n\n#title-char-3{\n  color:#87CEFA;\n}\n\n#title-char-4{\n  color:#FFA500;\n}\n\n#title-char-5{\n  color:#DA70D6;\n}\n\n#title-word-2{\n  color:#6A5ACD;\n}\n\n#title-word-3{\n  color:#ADFF2F;\n}\n\n.mapboxgl-ctrl-top-right{\n  display: flex;\n  justify-content: space-between;\n  width: 100%;\n}\n\n.mapboxgl-ctrl-geocoder{\n  height: 40px;\n}\n\n#map-tip{\n  background: #fff;\n  border-radius: 20px;\n  bottom: 0;\n  color: #ff0000;\n  padding: 3px;\n  position: absolute;\n  left: 25%;\n  z-index: 5;\n}\n\n.weather-map-container{\n  position: relative;\n}\n\n#location-content{\n  text-shadow: 1px 1px 12px #fff;\n}\n\n@keyframes icons {\n  0%   {\n        left: 10%;\n       }\n  50%  {\n        left:60%;\n      }\n  100% {\n        left: 10%;\n    }\n}\n", ""]);
 
 // exports
 
@@ -93689,6 +93422,222 @@ module.exports = function (css) {
 	return fixedCss;
 };
 
+
+/***/ }),
+/* 614 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(28);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _mapboxGl = __webpack_require__(398);
+
+var _mapboxGl2 = _interopRequireDefault(_mapboxGl);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+_mapboxGl2.default.accessToken = "pk.eyJ1IjoiY3JvYmVydGpvcmRhbiIsImEiOiJjajZ5cmNsejEwNndhMzRtbDl5ZnBqdnFmIn0.qO37QqTDIwpr4uq30TKd8A";
+
+var WeatherMap = function (_Component) {
+  _inherits(WeatherMap, _Component);
+
+  function WeatherMap(props) {
+    _classCallCheck(this, WeatherMap);
+
+    var _this = _possibleConstructorReturn(this, (WeatherMap.__proto__ || Object.getPrototypeOf(WeatherMap)).call(this, props));
+
+    _this.state = {
+      lat: 40.016457,
+      lng: -105.285884,
+      zoom: 10
+    };
+    return _this;
+  }
+
+  _createClass(WeatherMap, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      var _state = this.state,
+          lat = _state.lat,
+          lng = _state.lng,
+          zoom = _state.zoom;
+
+      var map = new _mapboxGl2.default.Map({
+        container: this.refs.map,
+        style: 'mapbox://styles/mapbox/dark-v9',
+        center: [lng, lat],
+        zoom: zoom
+      });
+
+      map.addControl(new _mapboxGl2.default.NavigationControl());
+      map.addControl(new MapboxGeocoder({
+        accessToken: _mapboxGl2.default.accessToken
+      }));
+
+      map.on('load', function () {
+        var imgSrc = 'https://cdn.dribbble.com/assets/icon-shotstat-like-6a1e9e9db48b9b788639f05a658379b7bb027a75d256127f812bf9392664396f.png';
+        map.loadImage(imgSrc, function (error, image) {
+          if (error) throw error;
+          map.addImage('compass', image);
+          map.addLayer({
+            "id": "points",
+            "type": "symbol",
+            "source": {
+              "type": "geojson",
+              "data": {
+                "type": "FeatureCollection",
+                "features": [{
+                  "type": "Feature",
+                  "geometry": {
+                    "type": "Point",
+                    "coordinates": [lng, lat]
+                  }
+                }]
+              }
+            },
+            "layout": {
+              "icon-image": "compass",
+              "icon-size": .6
+            }
+          });
+        });
+      });
+
+      map.on('move', function () {
+        var _map$getCenter = map.getCenter(),
+            lat = _map$getCenter.lat,
+            lng = _map$getCenter.lng;
+
+        _this2.setState({
+          lat: lat.toFixed(3),
+          lng: lng.toFixed(3),
+          zoom: map.getZoom().toFixed(1)
+        });
+      });
+
+      map.on('click', function (e) {
+        var _e$lngLat = e.lngLat,
+            lat = _e$lngLat.lat,
+            lng = _e$lngLat.lng;
+
+        _this2.props.handleApiCall(lat, lng);
+        map.flyTo({ center: e.lngLat, zoom: 10 });
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'section',
+        { className: 'weather-map-container' },
+        _react2.default.createElement(
+          'div',
+          { id: 'map-tip' },
+          ' click on map to get local forecast'
+        ),
+        _react2.default.createElement('div', { ref: 'map', className: 'Map-wrapper' })
+      );
+    }
+  }]);
+
+  return WeatherMap;
+}(_react.Component);
+
+;
+
+exports.default = WeatherMap;
+
+/***/ }),
+/* 615 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(28);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactAnimatedWeather = __webpack_require__(393);
+
+var _reactAnimatedWeather2 = _interopRequireDefault(_reactAnimatedWeather);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var WeatherAnimation = function (_Component) {
+  _inherits(WeatherAnimation, _Component);
+
+  function WeatherAnimation(props) {
+    _classCallCheck(this, WeatherAnimation);
+
+    var _this = _possibleConstructorReturn(this, (WeatherAnimation.__proto__ || Object.getPrototypeOf(WeatherAnimation)).call(this, props));
+
+    _this.state = {
+      icon: "RAIN",
+      color: 'goldenrod',
+      size: 152,
+      animate: _this.props.shouldAnimate
+    };
+    return _this;
+  }
+
+  _createClass(WeatherAnimation, [{
+    key: 'updateAnimationValues',
+    value: function updateAnimationValues() {
+      if (this.props.weather) {
+        return this.props.weather.currently.icon.toUpperCase().split('').map(function (char) {
+          return char == "-" ? "_" : char;
+        }).join('');
+      }
+      return "RAIN";
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      this.updateAnimationValues();
+      return _react2.default.createElement(_reactAnimatedWeather2.default, { id: 'weather-animation',
+        icon: this.updateAnimationValues(),
+        color: this.state.color,
+        size: this.state.size,
+        animate: this.state.animate
+      });
+    }
+  }]);
+
+  return WeatherAnimation;
+}(_react.Component);
+
+exports.default = WeatherAnimation;
 
 /***/ })
 /******/ ]);

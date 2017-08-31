@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import InputLocation from '../InputLocation'
-import WeatherAnimation from '../WeatherAnimation/WeatherAnimationContainer'
-import WeatherMap from '../WeatherMap/WeatherMapContainer'
+import WeatherAnimation from '../WeatherAnimation'
+import WeatherMap from '../WeatherMap'
 import WeatherInfo from '../WeatherInfo'
 const geocoder = require('geocoder')
 
@@ -16,22 +16,29 @@ class App extends Component{
   }
 
   componentDidMount(){
-    this.apiCall("Boulder", "Colorado")
+    const {lat,lng} = this.state
+    this.apiCall(lat, lng)
   }
 
-  apiCall(city,state){
-    this.setState({loading:true})
-    geocoder.geocode(`${city}, ${state}`, ( err, data ) => {
-      
-      const url = 'https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/'
-      const {lat,lng} = data.results[0].geometry.location
-      this.setState({lat:lat,lng:lng})
+  apiCall(lat,lng){
+    console.log("!!!!")
+    const url = 'https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/'
+      this.setState({lat:lat,lng:lng,loading:true})
       fetch(`${url}/${WEATHER_API_KEY}/${lat},${lng}`)
       .then(blob => blob.json())
-      .then(data => this.props.handleData(data),
-          this.setState({loading:false}))
+      .then(data => {
+        this.props.handleUpdateWeather(data),
+        this.getLocation(data.latitude,data.longitude)
+        this.setState({loading:false})
+      })
       .catch(err => console.log(err))
-  })
+ }
+
+ getLocation(lat,lng){
+   geocoder.reverseGeocode( lat, lng, ( err, data ) => {
+    const {formatted_address} = data.results[0]
+    this.props.handleLocation(formatted_address)
+  });
  }
 
  handleBackground(){
@@ -53,12 +60,20 @@ class App extends Component{
           <span id="title-word-2">your</span>
           <span id="title-word-3">day</span>
         </h3>
-        <WeatherInfo weather={this.props.weather}/>
-
+        <p id="location-content" className='title-greeting'>{this.props.location?this.props.location:null}</p>
+        <WeatherInfo
+          weather={this.props.weather}
+          />
         <div id="central-container">
-          <WeatherAnimation shouldAnimate={!this.state.loading}/>
+          <WeatherAnimation
+            shouldAnimate={!this.state.loading}
+            weather={this.props.weather}
+          />
         </div>
-          <WeatherMap id="weather-map" lat={this.state.lat} lng={this.state.lng}/>
+          <WeatherMap
+            id="weather-map"
+            handleApiCall={this.apiCall.bind(this)}
+          />
       </div>
     )
   }

@@ -60,7 +60,7 @@
   background: #fff;
   border-radius: 20px;
   bottom: 0;
-  color: red;
+  color: #ff0000;
   padding: 3px;
   position: absolute;
   left: 25%;
@@ -69,6 +69,10 @@
 
 .weather-map-container{
   position: relative;
+}
+
+#location-content{
+  text-shadow: 1px 1px 12px #fff;
 }
 
 @keyframes icons {

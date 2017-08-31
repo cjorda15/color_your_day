@@ -27,13 +27,6 @@ class WeatherMap extends Component {
     map.addControl(new MapboxGeocoder({
         accessToken: mapboxgl.accessToken
     }));
-    // //
-    // const geoInput = document.querySelector('.suggestions li')
-    // geoInput.addEventListener('click',()=> {
-    //   console.log("WOO")
-    // })
-    //
-    // console.log(geoInput)
 
     map.on('load', function() {
       const imgSrc = 'https://cdn.dribbble.com/assets/icon-shotstat-like-6a1e9e9db48b9b788639f05a658379b7bb027a75d256127f812bf9392664396f.png'
@@ -77,11 +70,7 @@ class WeatherMap extends Component {
 
     map.on('click', (e) => {
       const {lat,lng} = e.lngLat
-      const url = 'https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/'
-      fetch(`${url}/${WEATHER_API_KEY}/${lat},${lng}`)
-      .then(blob => blob.json())
-      .then(data => this.props.handleData(data))
-      .catch(err => console.log(err))
+      this.props.handleApiCall(lat,lng)
       map.flyTo({center: e.lngLat, zoom: 10})
     });
   };

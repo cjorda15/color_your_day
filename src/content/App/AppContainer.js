@@ -3,12 +3,13 @@ import { updateWeather, updateLocation } from '../../actions'
 import App from './App'
 const mapStateToProps = (state) => {
   return {
-    weather:state.weather
+    weather:state.weather,
+    location:state.location
   }
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleData: (input) => {
+    handleUpdateWeather: (input) => {
       dispatch(updateWeather(input))
   },
     handleLocation: (input) => {
