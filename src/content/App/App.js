@@ -11,7 +11,7 @@ class App extends Component{
     this.state = {
       loading:false,
       lat: 40.016457,
-      lng: -105.285884,
+      lng: -105.285884
     }
   }
 
@@ -31,11 +31,18 @@ class App extends Component{
           this.setState({loading:false}))
       .catch(err => console.log(err))
   })
-}
+ }
+
+ handleBackground(){
+  return  this.props.weather?
+      this.props.weather.currently.icon
+        :
+      ""
+   }
 
   render(){
     return(
-      <div className="app-container">
+      <div className={this.handleBackground() +" weather app-container"}>
         <h3 className="title-greeting">
           <span id="title-char-1">c</span>
           <span id="title-char-2">o</span>
@@ -45,12 +52,13 @@ class App extends Component{
           <span id="title-word-2">your</span>
           <span id="title-word-3">day</span>
         </h3>
+        <WeatherInfo weather={this.props.weather}/>
+
         <div id="central-container">
           <WeatherAnimation shouldAnimate={!this.state.loading}/>
         </div>
           <WeatherMap id="weather-map" lat={this.state.lat} lng={this.state.lng}/>
         <InputLocation handleCall={this.apiCall.bind(this)}/>
-        <WeatherInfo weather={this.props.weather}/>
       </div>
     )
   }

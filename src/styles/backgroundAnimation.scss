@@ -1,0 +1,25 @@
+.clear-day{
+  background-color: #FFD700;
+}
+
+.clear-night, .partly-cloudy-night{
+  background-color: #1a1a1a;
+  color: #fff;
+}
+
+.partly-cloudy-day{
+  background-color:#DCDCDC;
+}
+
+.snow{
+  background-color:#1a1a1a;
+  color:#fff;
+}
+
+.rain{
+  background-color: #AFEEEE;
+}
+
+.wind, .fog, .cloudy{
+  background-color:#FDF5E6;
+}

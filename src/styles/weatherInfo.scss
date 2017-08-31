@@ -1,0 +1,17 @@
+.weather-info-container{
+  display: flex;
+  font-size: 2em;
+  justify-content: space-around;
+  margin: 0px 15px;
+}
+
+.weather-info-content{
+  font-size: 22px;
+}
+
+@media (max-width:580px){
+  .weather-info-container{
+    flex-direction: column;
+    margin: 0px auto;
+  }
+}

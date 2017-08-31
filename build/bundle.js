@@ -56762,11 +56762,16 @@ var App = function (_Component) {
       });
     }
   }, {
+    key: 'handleBackground',
+    value: function handleBackground() {
+      return this.props.weather ? this.props.weather.currently.icon : "";
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { className: 'app-container' },
+        { className: this.handleBackground() + " weather app-container" },
         _react2.default.createElement(
           'h3',
           { className: 'title-greeting' },
@@ -56806,14 +56811,14 @@ var App = function (_Component) {
             'day'
           )
         ),
+        _react2.default.createElement(_WeatherInfo2.default, { weather: this.props.weather }),
         _react2.default.createElement(
           'div',
           { id: 'central-container' },
           _react2.default.createElement(_WeatherAnimationContainer2.default, { shouldAnimate: !this.state.loading })
         ),
         _react2.default.createElement(_WeatherMapContainer2.default, { id: 'weather-map', lat: this.state.lat, lng: this.state.lng }),
-        _react2.default.createElement(_InputLocation2.default, { handleCall: this.apiCall.bind(this) }),
-        _react2.default.createElement(_WeatherInfo2.default, { weather: this.props.weather })
+        _react2.default.createElement(_InputLocation2.default, { handleCall: this.apiCall.bind(this) })
       );
     }
   }]);
@@ -56903,7 +56908,7 @@ var InputLocation = function (_Component) {
         return _react2.default.createElement(
           "div",
           { className: "error-message" },
-          "error, need at least a state or a city"
+          "error, need city and state/country filled in"
         );
       }
     }
@@ -56926,7 +56931,7 @@ var InputLocation = function (_Component) {
             }
           }),
           _react2.default.createElement("input", {
-            placeholder: "state",
+            placeholder: "state/country",
             value: this.state.state,
             onChange: function onChange(e) {
               _this3.handleInput(e.target.value, "state");
@@ -58506,16 +58511,20 @@ var WeatherInfo = function WeatherInfo(_ref) {
       )
     ),
     _react2.default.createElement(
-      "p",
+      "div",
       null,
-      " ",
-      weather ? "Temp: " + weather.currently.apparentTemperature : null
-    ),
-    _react2.default.createElement(
-      "p",
-      null,
-      " ",
-      weather ? "Wind Speed: " + weather.currently.windSpeed : null
+      _react2.default.createElement(
+        "p",
+        null,
+        " ",
+        weather ? "Temp: " + weather.currently.apparentTemperature : null
+      ),
+      _react2.default.createElement(
+        "p",
+        null,
+        " ",
+        weather ? "Wind Speed: " + weather.currently.windSpeed : null
+      )
     )
   );
 };
@@ -93146,6 +93155,8 @@ exports = module.exports = __webpack_require__(137)(undefined);
 // imports
 exports.i(__webpack_require__(608), "");
 exports.i(__webpack_require__(609), "");
+exports.i(__webpack_require__(615), "");
+exports.i(__webpack_require__(614), "");
 
 // module
 exports.push([module.i, "* {\n  box-sizing: border-box;\n  padding: 0px;\n  margin: 0px; }\n\nbody {\n  font-family: 'Indie Flower', cursive; }\n\n.Map-wrapper {\n  height: 200px;\n  width: 100%; }\n", ""]);
@@ -93176,7 +93187,7 @@ exports = module.exports = __webpack_require__(137)(undefined);
 
 
 // module
-exports.push([module.i, ".error-message{\n  background: rgba(0,0,0,.9);\n  color:#fff;\n  height: 100vw;\n  font-size:2em;\n  padding: 25%;\n  position: absolute;\n  top: 0px;\n  width: 100vw;\n}\n\n.input-location-form{\n  display: flex;\n  flex-direction: column;\n  max-width: 300px;\n  margin: 10px auto;\n}\n\n.input-location-form input,\n.input-location-form button{\n  font-family: 'Indie Flower', cursive;\n  font-size: 1.3em;\n}\n.input-location-form button{\n  background: #1a1a1a;\n  border: none;\n  color:#6495ed;\n  font-size: 19px;\n  height: 44px;\n}\n\n.input-location-form button:hover{\n  font-size: 20px;\n  transition: all .4s;\n}\n\n.input-location-form input{\n  padding-left: 5px;\n  font-size: 24px;\n}\n", ""]);
+exports.push([module.i, ".error-message{\n  background: rgba(0,0,0,.9);\n  color:#fff;\n  height: 100vw;\n  font-size:2em;\n  padding: 25%;\n  position: absolute;\n  top: 0px;\n  width: 100vw;\n}\n\n.input-location-form{\n  display: flex;\n  flex-direction: column;\n  max-width: 300px;\n  margin: 10px auto;\n}\n\n.input-location-form input,\n.input-location-form button{\n  font-family: 'Indie Flower', cursive;\n  font-size: 1.3em;\n}\n.input-location-form button{\n  background: #1a1a1a;\n  border: 2px solid #6495ed;\n  color:#6495ed;\n  font-size: 19px;\n  height: 44px;\n}\n\n.input-location-form button:hover{\n  background: #6495ed;\n  border-width: 0px;\n  color:#1a1a1a;\n  font-size: 20px;\n  transition: all .4s;\n}\n\n.input-location-form input{\n  padding-left: 5px;\n  font-size: 24px;\n}\n", ""]);
 
 // exports
 
@@ -93633,6 +93644,36 @@ module.exports = function (css) {
 	// send back the fixed css
 	return fixedCss;
 };
+
+
+/***/ }),
+/* 612 */,
+/* 613 */,
+/* 614 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(137)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, ".clear-day{\n  background-color: #FFD700;\n}\n\n.clear-night, .partly-cloudy-night{\n  background-color: #1a1a1a;\n  color: #fff;\n}\n\n.partly-cloudy-day{\n  background-color:#DCDCDC;\n}\n\n.snow{\n  background-color:#1a1a1a;\n  color:#fff;\n}\n\n.rain{\n  background-color: #AFEEEE;\n}\n\n.wind, .fog, .cloudy{\n  background-color:#FDF5E6;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 615 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(137)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, ".weather-info-container{\n  display: flex;\n  font-size: 2em;\n  justify-content: space-around;\n  margin: 0px 15px;\n}\n\n.weather-info-content{\n  font-size: 22px;\n}\n\n@media (max-width:580px){\n  .weather-info-container{\n    flex-direction: column;\n    margin: 0px auto;\n  }\n}\n", ""]);
+
+// exports
 
 
 /***/ })

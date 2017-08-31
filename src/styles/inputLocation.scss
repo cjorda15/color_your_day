@@ -23,13 +23,16 @@
 }
 .input-location-form button{
   background: #1a1a1a;
-  border: none;
+  border: 2px solid #6495ed;
   color:#6495ed;
   font-size: 19px;
   height: 44px;
 }
 
 .input-location-form button:hover{
+  background: #6495ed;
+  border-width: 0px;
+  color:#1a1a1a;
   font-size: 20px;
   transition: all .4s;
 }

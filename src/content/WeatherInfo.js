@@ -7,8 +7,10 @@ const WeatherInfo = ({weather}) => {
         <p> {weather?"Currently "+ weather.currently.summary:null}</p>
         <p> {weather?"Later "+ weather.hourly.summary:null}</p>
       </div>
-      <p> {weather?"Temp: "+ weather.currently.apparentTemperature:null}</p>
-      <p> {weather?"Wind Speed: "+ weather.currently.windSpeed:null}</p>
+      <div>
+        <p> {weather?"Temp: "+ weather.currently.apparentTemperature:null}</p>
+        <p> {weather?"Wind Speed: "+ weather.currently.windSpeed:null}</p>
+      </div>
     </div>
   )
 }

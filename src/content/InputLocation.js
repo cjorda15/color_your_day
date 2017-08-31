@@ -32,7 +32,7 @@ class InputLocation extends Component{
 
   errorMessage(){
     if(this.state.showError){
-     return <div className="error-message">error, need at least a state or a city</div>
+     return <div className="error-message">error, need city and state/country filled in</div>
    }
   }
 
@@ -46,7 +46,7 @@ class InputLocation extends Component{
           onChange={(e)=>{this.handleInput(e.target.value,"city")}}
             />
         <input
-          placeholder="state"
+          placeholder="state/country"
           value={this.state.state}
           onChange={(e)=>{this.handleInput(e.target.value,"state")}}
             />
