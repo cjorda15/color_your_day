@@ -19,7 +19,14 @@ module.exports = {
         {
          test: /\.scss$/,
          loaders: ["style-loader", "css-loader", "sass-loader"]
-             },]
+             },
+        {
+  test: /\.(jpg|png|svg)$/,
+  loader: 'url-loader',
+  options: {
+    limit: 25000,
+  },
+},]
   },
   resolve: {
   extensions: ['.js', '.jsx', '.json', '.scss', '.css']

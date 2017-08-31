@@ -22,6 +22,7 @@ class App extends Component{
   apiCall(city,state){
     this.setState({loading:true})
     geocoder.geocode(`${city}, ${state}`, ( err, data ) => {
+      
       const url = 'https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/'
       const {lat,lng} = data.results[0].geometry.location
       this.setState({lat:lat,lng:lng})
@@ -37,12 +38,12 @@ class App extends Component{
   return  this.props.weather?
       this.props.weather.currently.icon
         :
-      ""
+      "clear-day"
    }
 
   render(){
     return(
-      <div className={this.handleBackground() +" weather app-container"}>
+      <div className={this.handleBackground()+ " weather app-container"}>
         <h3 className="title-greeting">
           <span id="title-char-1">c</span>
           <span id="title-char-2">o</span>
@@ -58,10 +59,11 @@ class App extends Component{
           <WeatherAnimation shouldAnimate={!this.state.loading}/>
         </div>
           <WeatherMap id="weather-map" lat={this.state.lat} lng={this.state.lng}/>
-        <InputLocation handleCall={this.apiCall.bind(this)}/>
       </div>
     )
   }
 }
+// <InputLocation handleCall={this.apiCall.bind(this)}/>
+
 
 export default App

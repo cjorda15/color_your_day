@@ -7,7 +7,7 @@ class WeatherAnimation extends Component{
     this.state={
       icon: "RAIN",
       color: 'goldenrod',
-      size: 252,
+      size: 152,
       animate: this.props.shouldAnimate
     }
   }

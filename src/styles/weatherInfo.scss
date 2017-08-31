@@ -1,13 +1,16 @@
 .weather-info-container{
   display: flex;
-  font-size: 2em;
   justify-content: space-around;
   margin: 0px 15px;
 }
 
 .weather-info-content{
+  color:#fff;
   font-size: 22px;
+  padding: 5px;
+  text-shadow: 1px 1px 1px #000;
 }
+
 
 @media (max-width:580px){
   .weather-info-container{

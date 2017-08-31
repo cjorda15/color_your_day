@@ -20,6 +20,7 @@
     "css-loader": "^0.28.5",
     "dotenv": "^4.0.0",
     "express": "^4.15.4",
+    "file-loader": "^0.11.2",
     "geocoder": "^0.2.3",
     "json-loader": "^0.5.7",
     "leaflet": "^1.2.0",
@@ -31,7 +32,8 @@
     "react-leaflet": "^1.6.4",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
-    "style-loader": "^0.18.2"
+    "style-loader": "^0.18.2",
+    "url-loader": "^0.5.9"
   },
   "devDependencies": {
     "node-sass": "^4.5.3",

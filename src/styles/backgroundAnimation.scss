@@ -1,25 +1,50 @@
 .clear-day{
-  background-color: #FFD700;
-}
-
-.clear-night, .partly-cloudy-night{
-  background-color: #1a1a1a;
-  color: #fff;
+  background-color: #6495ed !important;
 }
 
 .partly-cloudy-day{
-  background-color:#DCDCDC;
+  background-color: #c9f4ff !important;
 }
 
+.wind,.cloudy{
+  background-color: #c0dee5 !important;
+}
+
+.fog{
+    background-color: #f7fdff !important;
+}
+
+.clear-night,
+.partly-cloudy-night,
 .snow{
-  background-color:#1a1a1a;
-  color:#fff;
+  background-color: #1a1a1a;
 }
 
 .rain{
   background-color: #AFEEEE;
 }
 
-.wind, .fog, .cloudy{
-  background-color:#FDF5E6;
+.clear-day,
+.partly-cloudy-day,
+.partly-cloudy-day,
+.cloudy,
+.wind,
+.fog,
+.partly-cloudy-night{
+  animation: wind 20s linear infinite;
+  background: url('https://static.radulescu.me/examples/clouds/clouds1000.png');
+  background: url('https://static.radulescu.me/examples/clouds/clouds1000.png') 0 200px,
+              url('https://static.radulescu.me/examples/clouds/clouds1200_1.png') 0 300px,
+              url('https://static.radulescu.me/examples/clouds/clouds1000_blur3.png') 100px 250px;
+}
+
+
+@keyframes wind{
+  0% {
+    background-position: 0 200px, 0 300px, 100px 250px;
+  }
+  100% {
+    background-position: 1000px 200px, 1200px 300px, 1100px 250px;
+  }
+
 }

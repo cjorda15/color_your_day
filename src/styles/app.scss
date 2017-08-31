@@ -1,6 +1,5 @@
 .app-container{
-  display: flex;
-  flex-direction: column;
+  height: 100%;
 }
 
 #central-container{
@@ -12,7 +11,6 @@
   animation: icons 60s infinite;
   position: relative;
   top:-20px;
-  opacity: 0.7;
 }
 
 .title-greeting{
@@ -46,6 +44,31 @@
 
 #title-word-3{
   color:#ADFF2F;
+}
+
+.mapboxgl-ctrl-top-right{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.mapboxgl-ctrl-geocoder{
+  height: 40px;
+}
+
+#map-tip{
+  background: #fff;
+  border-radius: 20px;
+  bottom: 0;
+  color: red;
+  padding: 3px;
+  position: absolute;
+  left: 25%;
+  z-index: 5;
+}
+
+.weather-map-container{
+  position: relative;
 }
 
 @keyframes icons {

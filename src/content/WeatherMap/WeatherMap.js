@@ -3,25 +3,37 @@ import mapboxgl from 'mapbox-gl';
 
 mapboxgl.accessToken = MAP_API_KEY;
 
+
 class WeatherMap extends Component {
   constructor(props) {
     super(props)
     this.state = {
       lat: 40.016457,
       lng: -105.285884,
-      zoom: 9
+      zoom: 10
     }
   };
 
   componentDidMount() {
     const { lat, lng, zoom } = this.state
-    // const lat =
     let map = new mapboxgl.Map({
       container: this.refs.map,
       style: 'mapbox://styles/mapbox/dark-v9',
       center: [lng, lat],
       zoom
     });
+
+    map.addControl(new mapboxgl.NavigationControl());
+    map.addControl(new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken
+    }));
+    // //
+    // const geoInput = document.querySelector('.suggestions li')
+    // geoInput.addEventListener('click',()=> {
+    //   console.log("WOO")
+    // })
+    //
+    // console.log(geoInput)
 
     map.on('load', function() {
       const imgSrc = 'https://cdn.dribbble.com/assets/icon-shotstat-like-6a1e9e9db48b9b788639f05a658379b7bb027a75d256127f812bf9392664396f.png'
@@ -52,7 +64,6 @@ class WeatherMap extends Component {
       });
     });
 
-    map.addControl(new mapboxgl.NavigationControl());
 
     map.on('move', () => {
       const { lat, lng } = map.getCenter();
@@ -77,7 +88,8 @@ class WeatherMap extends Component {
 
   render() {
     return (
-      <section className="weather-map-containerc">
+      <section className="weather-map-container">
+        <div id="map-tip"> click on map to get local forecast</div>
         <div ref='map' className='Map-wrapper'></div>
       </section>
     )
