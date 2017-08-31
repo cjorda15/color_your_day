@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 
-class InputLocation extends Component{
+class TimeMachineInput extends Component{
   constructor(props){
     super(props)
     this.state = {
@@ -38,7 +38,8 @@ class InputLocation extends Component{
 
   render(){
     return(
-      <div className="input-location-container">
+      <div className="time-machine-input-container">
+        <p>or color a location by range of dates in certain intervals</p>
         <form className="input-location-form">
         <input
           placeholder="city"
@@ -59,4 +60,4 @@ class InputLocation extends Component{
 }
 
 
-export default InputLocation
+export default TimeMachineInput

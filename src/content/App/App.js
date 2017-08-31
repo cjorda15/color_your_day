@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import InputLocation from '../InputLocation'
+import TimeMachineInput from '../TimeMachineInput'
 import WeatherAnimation from '../WeatherAnimation'
 import WeatherMap from '../WeatherMap'
 import WeatherInfo from '../WeatherInfo'
@@ -21,7 +21,6 @@ class App extends Component{
   }
 
   apiCall(lat,lng){
-    console.log("!!!!")
     const url = 'https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/'
       this.setState({lat:lat,lng:lng,loading:true})
       fetch(`${url}/${WEATHER_API_KEY}/${lat},${lng}`)
@@ -60,6 +59,10 @@ class App extends Component{
           <span id="title-word-2">your</span>
           <span id="title-word-3">day</span>
         </h3>
+        <WeatherMap
+          id="weather-map"
+          handleApiCall={this.apiCall.bind(this)}
+        />
         <p id="location-content" className='title-greeting'>{this.props.location?this.props.location:null}</p>
         <WeatherInfo
           weather={this.props.weather}
@@ -70,10 +73,7 @@ class App extends Component{
             weather={this.props.weather}
           />
         </div>
-          <WeatherMap
-            id="weather-map"
-            handleApiCall={this.apiCall.bind(this)}
-          />
+        <TimeMachineInput/>
       </div>
     )
   }

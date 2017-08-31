@@ -1,0 +1,49 @@
+.error-message{
+  background: rgba(0,0,0,.9);
+  color:#fff;
+  height: 100vw;
+  font-size:2em;
+  padding: 25%;
+  position: absolute;
+  top: 50%;
+  width: 100vw;
+}
+
+.time-machine-input-container{
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+  margin: 10px auto;
+}
+
+.input-location-form{
+  display: flex;
+}
+
+
+.input-location-form input, button{
+  font-family: 'Indie Flower', cursive;
+  font-size: 1.3em;
+}
+
+.input-location-form button :hover{
+  background: #6495ed;
+  border-width: 0px;
+  color:#1a1a1a;
+  font-size: 20px;
+  transition: all .4s;
+}
+
+.input-location-form button{
+  background: #1a1a1a;
+  border: 2px solid #6495ed;
+  color:#6495ed;
+  font-size: 19px;
+  height: 44px;
+}
+
+.input-location-form input{
+padding-left: 5px;
+font-size: 24px;
+}
