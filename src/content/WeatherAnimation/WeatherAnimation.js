@@ -24,7 +24,7 @@ class WeatherAnimation extends Component{
     render(){
       this.updateAnimationValues()
       return(
-        <ReactAnimatedWeather
+        <ReactAnimatedWeather id="weather-animation"
         icon={this.updateAnimationValues()}
         color={this.state.color}
         size={this.state.size}

@@ -36,11 +36,21 @@ class App extends Component{
   render(){
     return(
       <div className="app-container">
-        <h3>color your day</h3>
+        <h3 className="title-greeting">
+          <span id="title-char-1">c</span>
+          <span id="title-char-2">o</span>
+          <span id="title-char-3">l</span>
+          <span id="title-char-4">o</span>
+          <span id="title-char-5">r</span>
+          <span id="title-word-2">your</span>
+          <span id="title-word-3">day</span>
+        </h3>
+        <div id="central-container">
+          <WeatherAnimation shouldAnimate={!this.state.loading}/>
+        </div>
+          <WeatherMap id="weather-map" lat={this.state.lat} lng={this.state.lng}/>
         <InputLocation handleCall={this.apiCall.bind(this)}/>
-        <WeatherAnimation shouldAnimate={!this.state.loading}/>
         <WeatherInfo weather={this.props.weather}/>
-        <WeatherMap lat={this.state.lat} lng={this.state.lng}/>
       </div>
     )
   }

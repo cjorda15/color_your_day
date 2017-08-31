@@ -39,15 +39,13 @@ class InputLocation extends Component{
   render(){
     return(
       <div className="input-location-container">
-        <form>
+        <form className="input-location-form">
         <input
-          className="input-location"
           placeholder="city"
           value={this.state.city}
           onChange={(e)=>{this.handleInput(e.target.value,"city")}}
             />
         <input
-          className="input-location"
           placeholder="state"
           value={this.state.state}
           onChange={(e)=>{this.handleInput(e.target.value,"state")}}

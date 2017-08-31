@@ -8,3 +8,33 @@
   top: 0px;
   width: 100vw;
 }
+
+.input-location-form{
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+  margin: 10px auto;
+}
+
+.input-location-form input,
+.input-location-form button{
+  font-family: 'Indie Flower', cursive;
+  font-size: 1.3em;
+}
+.input-location-form button{
+  background: #1a1a1a;
+  border: none;
+  color:#6495ed;
+  font-size: 19px;
+  height: 44px;
+}
+
+.input-location-form button:hover{
+  font-size: 20px;
+  transition: all .4s;
+}
+
+.input-location-form input{
+  padding-left: 5px;
+  font-size: 24px;
+}

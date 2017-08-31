@@ -13,17 +13,12 @@ class WeatherMap extends Component {
     }
   };
 
-  componentWillReceiveProps(){
-    console.log("!")
-    this.setState({lat:this.props.lat,lng: this.props.lng})
-  }
-
   componentDidMount() {
     const { lat, lng, zoom } = this.state
     // const lat =
     let map = new mapboxgl.Map({
       container: this.refs.map,
-      style: 'mapbox://styles/mapbox/basic-v9',
+      style: 'mapbox://styles/mapbox/dark-v9',
       center: [lng, lat],
       zoom
     });
@@ -56,7 +51,7 @@ class WeatherMap extends Component {
         });
       });
     });
-    
+
     map.addControl(new mapboxgl.NavigationControl());
 
     map.on('move', () => {
