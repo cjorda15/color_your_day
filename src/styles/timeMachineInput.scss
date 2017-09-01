@@ -41,6 +41,10 @@
   height: 44px;
 }
 
+.input-form-container{
+  display: flex;
+}
+
 .input-location-form button:hover{
   background: #6495ed;
   border-width: 0px;
@@ -50,8 +54,10 @@
 }
 
 .input-location-form input{
-padding-left: 5px;
-font-size: 24px;
+  padding-left: 5px;
+  font-size: 24px;
+  height: 45px;
+  border-radius: 6px;
 }
 
 .tm-input-word{

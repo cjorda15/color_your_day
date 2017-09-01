@@ -30,7 +30,7 @@ class App extends Component{
 
 
           // fetch(`${url}/${WEATHER_API_KEY}/${location.lat},${location.lng}`)
-          fetch(`${url}/${WEATHER_API_KEY}/42.3601,-71.0589,409467600`)
+          fetch(`${url}/${WEATHER_API_KEY}/${location.lat},${location.lng},15042422`)
           .then(blob => blob.json())
           .then(data => {
             this.props.handleUpdateWeather(data),

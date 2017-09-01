@@ -1,4 +1,6 @@
 import React, {Component} from 'react'
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 class TimeMachineForm extends Component{
   constructor(props){
@@ -6,9 +8,16 @@ class TimeMachineForm extends Component{
     this.state = {
       city:"",
       state:"",
+      date:"",
       showError:false
     }
+    this.handleChange = this.handleChange.bind(this);
   }
+
+  handleChange(date) {
+    console.log(date)
+  this.setState({date: date});
+}
 
   handleInput(input,type){
      this.setState({[type]:input})
@@ -20,13 +29,14 @@ class TimeMachineForm extends Component{
   }
 
   handleSubmit(e){
+    // const date =
     e.preventDefault()
     const {city,state} = this.state
     if(!city || !state){
       this.handleError()
       return
     }
-    this.props.handleCall(city,state,true)
+    this.props.handleCall(city,state,true,date)
     this.setState({city:"",state:""})
   }
 
@@ -54,39 +64,43 @@ class TimeMachineForm extends Component{
           <span className="tm-input-word" id="tm-input-word-8">categories</span>
         </div>
         <form className="input-location-form">
-        <div>
-          <input
-            placeholder="city"
-            value={this.state.city}
-            onChange={(e)=>{this.handleInput(e.target.value,"city")}}
-          />
-          <input
-            placeholder="state"
-            value={this.state.state}
-            onChange={(e)=>{this.handleInput(e.target.value,"state")}}
-           />
-        </div>
-        <div>
-          <input
-            placeholder="date mm/dd/yyyy"
-            type="date"
-            value={this.state.date}
-            onChange={(e)=>{this.handleInput(e.target.value,"date")}}
-          />
-        </div>
-        <select id="categories-input" onChange={(e)=>{console.log(e.target.value)}}>
-          <option value="temperature">temperature</option>
-          <option value="humidity">humidity</option>
-          <option value="windSpeed">windSpeed</option>
-          <option value="cloudCover">cloudCover</option>
-        </select>
-        <button onClick={(e)=>{this.handleSubmit(e)}}>submit</button>
-        </form>
-        {this.errorMessage()}
+          <div className="input-form-container">
+            <input
+              placeholder="city"
+              value={this.state.city}
+              onChange={(e)=>{this.handleInput(e.target.value,"city")}}
+             />
+            <input
+              placeholder="state"
+              value={this.state.state}
+              onChange={(e)=>{this.handleInput(e.target.value,"state")}}
+             />
+          </div>
+          <div className="input-form-container">
+            <DatePicker
+              selected={this.state.startDate}
+              onChange={this.handleChange}
+              />;
+            <select id="categories-input" onChange={(e)=>{console.log(e.target.value)}}>
+              <option value="temperature">temperature</option>
+              <option value="humidity">humidity</option>
+              <option value="windSpeed">windSpeed</option>
+              <option value="cloudCover">cloudCover</option>
+            </select>
+           </div>
+          <button onClick={(e)=>{this.handleSubmit(e)}}>submit</button>
+          </form>
+          {this.errorMessage()}
       </div>
     )
   }
 }
 
+// <input
+//   placeholder="date mm/dd/yyyy"
+//   type="date"
+//   value={this.state.date}
+//   onChange={(e)=>{this.handleInput(e.target.value,"date")}}
+// />
 
 export default TimeMachineForm
