@@ -17,7 +17,7 @@ class WeatherMap extends Component {
     const { lat, lng, zoom } = this.state
     let map = new mapboxgl.Map({
       container: this.refs.map,
-      style: 'mapbox://styles/mapbox/dark-v9',
+      style: 'mapbox://styles/mapbox/light-v9',
       center: [lng, lat],
       zoom
     });

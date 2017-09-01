@@ -16,7 +16,7 @@ html {
 }
 
 body {
-  font-family: 'Indie Flower', cursive;
+  font-family: 'Indie Flower', sans-serif;
    margin: 0px;
    min-height: 100%;
    width: 100%;
@@ -27,6 +27,10 @@ body {
 }
 
 .Map-wrapper {
-  height: 200px;
+  height: 400px;
   width: 100%;
+}
+
+.mapboxgl-canvas{
+  height: 400px !important;
 }
