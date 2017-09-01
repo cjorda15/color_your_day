@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import TimeMachineInput from './TimeMachineInput'
 
 class TimeMachineForm extends Component{
   constructor(props){
@@ -7,8 +6,6 @@ class TimeMachineForm extends Component{
     this.state = {
       city:"",
       state:"",
-      interval:"",
-      date:""
       showError:false
     }
   }
@@ -29,7 +26,7 @@ class TimeMachineForm extends Component{
       this.handleError()
       return
     }
-    this.props.handleCall(city,state)
+    this.props.handleCall(city,state,true)
     this.setState({city:"",state:""})
   }
 
@@ -49,43 +46,47 @@ class TimeMachineForm extends Component{
           <span  id="title-char-3">l</span>
           <span  id="title-char-4">o</span>
           <span  id="title-char-5">r</span>
-          <span className="tm-input-word" id="tm-input-word-3">a</span>
-          <span className="tm-input-word" id="tm-input-word-4">location</span>
-          <span className="tm-input-word" id="tm-input-word-5">by</span>
-          <span className="tm-input-word" id="tm-input-word-6">range</span>
+          <span className="tm-input-word" id="tm-input-word-3">by</span>
+          <span className="tm-input-word" id="tm-input-word-4">week</span>
+          <span className="tm-input-word" id="tm-input-word-5">with</span>
+          <span className="tm-input-word" id="tm-input-word-6">list</span>
           <span className="tm-input-word" id="tm-input-word-7">of</span>
-          <span className="tm-input-word" id="tm-input-word-8">dates</span>
-          <span className="tm-input-word" id="tm-input-word-9">in</span>
-          <span className="tm-input-word" id="tm-input-word-10">certain</span>
-          <span className="tm-input-word" id="tm-input-word-11">intervals</span>
+          <span className="tm-input-word" id="tm-input-word-8">categories</span>
         </div>
         <form className="input-location-form">
-          <TimeMachineInput
-            setsState={()=>{setState.bind(this)}}
+        <div>
+          <input
+            placeholder="city"
             value={this.state.city}
-            type={"city"}/>
-          <TimeMachineInput
-            setsState={()=>{setState.bind(this)}}
+            onChange={(e)=>{this.handleInput(e.target.value,"city")}}
+          />
+          <input
+            placeholder="state/country"
             value={this.state.state}
-            type={"state"}/>
-/// interval with options for by what
-          <select>
-          <option value="volvo">Volvo</option>
-          <option value="saab">Saab</option>
-          <option value="vw">VW</option>
-          <option value="audi" selected>Audi</option>
-          </select>
-                  <TimeMachineInput
-                    setsState={()=>{setState.bind(this)}}
-                    value={this.state.date}
-                type={"date"}/>
-                <button onClick={(e)=>{this.handleSubmit(e)}}>submit</button>
-                </form>
-                {this.errorMessage()}
-              </div>
-            )
-          }
-          }
+            onChange={(e)=>{this.handleInput(e.target.value,"state")}}
+           />
+        </div>
+        <div>
+          <input
+            placeholder="date mm/dd/yyyy"
+            type="date"
+            value={this.state.date}
+            onChange={(e)=>{this.handleInput(e.target.value,"date")}}
+          />
+        </div>
+        <select onChange={(e)=>{console.log(e.target.value)}}>
+          <option value="temperature">temperature</option>
+          <option value="humidity">humidity</option>
+          <option value="windSpeed">windSpeed</option>
+          <option value="cloudCover">cloudCover</option>
+        </select>
+        <button onClick={(e)=>{this.handleSubmit(e)}}>submit</button>
+        </form>
+        {this.errorMessage()}
+      </div>
+    )
+  }
+}
 
 
 export default TimeMachineForm

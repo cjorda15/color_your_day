@@ -3,7 +3,7 @@
 }
 
 #central-container{
-  position: absolute;
+  position: relative;
 }
 
 #central-container canvas{
@@ -13,7 +13,7 @@
 }
 
 .title-greeting{
-  font-size: 42px;
+  font-size: 25px;
   text-align: center;
   text-shadow: 2px 2px 1px seagreen;
 }

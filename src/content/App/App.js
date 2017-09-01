@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import TimeMachineInput from '../TimeMachineForm'
+import TimeMachineForm from '../TimeMachineForm'
 import WeatherAnimation from '../WeatherAnimation'
 import WeatherMap from '../WeatherMap'
 import WeatherInfo from '../WeatherInfo'
@@ -20,17 +20,31 @@ class App extends Component{
     this.apiCall(lat, lng)
   }
 
-  apiCall(lat,lng,type){
-    // const url = 'https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/'
-    //   this.setState({lat:lat,lng:lng,loading:true})
-    //   fetch(`${url}/${WEATHER_API_KEY}/${lat},${lng}`)
-    //   .then(blob => blob.json())
-    //   .then(data => {
-    //     this.props.handleUpdateWeather(data),
-    //     this.getLocation(data.latitude,data.longitude)
-    //     this.setState({loading:false})
-    //   })
-    //   .catch(err => console.log(err))
+  apiCall(lat,lng,updateInput){
+    const url = 'https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/'
+      var location;
+      if(updateInput){
+        geocoder.geocode(`${lat}, ${lng}`, ( err, data ) => {
+          location = data.results[0].geometry.location
+          fetch(`${url}/${WEATHER_API_KEY}/${location.lat},${location.lng}`)
+          .then(blob => blob.json())
+          .then(data => {
+            this.props.handleUpdateWeather(data),
+            this.getLocation(data.latitude,data.longitude)
+            this.setState({loading:false})
+            })
+          })
+        return
+      }
+      this.setState({lat:lat,lng:lng,loading:true})
+      fetch(`${url}/${WEATHER_API_KEY}/${lat},${lng}`)
+      .then(blob => blob.json())
+      .then(data => {
+        this.props.handleUpdateWeather(data),
+        this.getLocation(data.latitude,data.longitude)
+        this.setState({loading:false})
+      })
+      .catch(err => console.log(err))
  }
 
  getLocation(lat,lng){
@@ -62,7 +76,7 @@ class App extends Component{
         <WeatherMap
           id="weather-map"
           handleApiCall={this.apiCall.bind(this)}
-        />
+         />
         <p id="location-content" className='title-greeting'>{this.props.location?this.props.location:null}</p>
         <WeatherInfo
           weather={this.props.weather}
@@ -71,14 +85,13 @@ class App extends Component{
           <WeatherAnimation
             shouldAnimate={!this.state.loading}
             weather={this.props.weather}
-          />
+           />
         </div>
-        <TimeMachineInput handleCall={()=>{this.apiCall.bind(this)}}/>
+        <TimeMachineForm handleCall={this.apiCall.bind(this)}/>
       </div>
     )
   }
 }
-// <InputLocation handleCall={this.apiCall.bind(this)}/>
 
 
 export default App
