@@ -15,4 +15,13 @@ describe('Client Routes', () => {
     })
   })
 
+  it('should return a sad path', (done) => {
+    chai.request(server)
+    .get('/sadness')
+    .end((err, response) => {
+      response.should.have.status(404)
+      done()
+    })
+  })
+
 });

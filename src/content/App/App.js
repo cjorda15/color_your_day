@@ -3,6 +3,7 @@ import TimeMachineForm from '../TimeMachineForm'
 import WeatherAnimation from '../WeatherAnimation'
 import WeatherMap from '../WeatherMap'
 import WeatherInfo from '../WeatherInfo'
+import darkSkyApiCall from '../../helper/darkSkyApiCall'
 const geocoder = require('geocoder')
 
 class App extends Component{
@@ -21,18 +22,10 @@ class App extends Component{
   }
 
   apiCall(lat,lng,time){
-    const url = 'https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/'
-    const param = time? `${lat},${lng},${time}` : `${lat},${lng}`
-    const query = `exclude=flags,minutely`
-      this.setState({lat:lat,lng:lng,loading:true})
-      fetch(`${url}/${WEATHER_API_KEY}/${param}?${query}`)
-      .then(blob => blob.json())
-      .then(data => {
-        this.props.handleUpdateWeather(data),
-        this.getLocation(data.latitude,data.longitude)
-        this.setState({loading:false})
-      })
-      .catch(err => console.log(err))
+    darkSkyApiCall(lat,lng,time,
+                  this.props.handleUpdateWeather.bind(this),
+                  this.getLocation.bind(this),
+                  this.setState.bind(this))
  }
 
  getLocation(lat,lng){
@@ -68,7 +61,7 @@ class App extends Component{
         <p id="location-content">{this.props.location?this.props.location:null}</p>
         <WeatherInfo
           weather={this.props.weather}
-          />
+         />
         <div id="central-container">
           <WeatherAnimation
             shouldAnimate={!this.state.loading}
