@@ -17,11 +17,11 @@
 .clear-night,
 .partly-cloudy-night,
 .snow{
-  background-color: #1a1a1a;
+  background-color: #1a1a1a !important;
 }
 
 .rain{
-  background-color: #AFEEEE;
+  background-color: #AFEEEE !important;
 }
 
 .clear-day,
@@ -37,7 +37,6 @@
               url('https://static.radulescu.me/examples/clouds/clouds1200_1.png') 0 300px,
               url('https://static.radulescu.me/examples/clouds/clouds1000_blur3.png') 100px 250px;
 }
-
 
 @keyframes wind{
   0% {

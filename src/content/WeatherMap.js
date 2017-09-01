@@ -3,7 +3,6 @@ import mapboxgl from 'mapbox-gl';
 
 mapboxgl.accessToken = MAP_API_KEY;
 
-
 class WeatherMap extends Component {
   constructor(props) {
     super(props)
@@ -56,7 +55,6 @@ class WeatherMap extends Component {
         });
       });
     });
-
 
     map.on('move', () => {
       const { lat, lng } = map.getCenter();

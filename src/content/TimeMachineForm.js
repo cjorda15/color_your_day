@@ -29,8 +29,6 @@ class TimeMachineForm extends Component{
     setTimeout(()=>{this.setState({showError:false})},2000)
   }
 
-
-
   handleSubmit(e){
     e.preventDefault()
     const {address,stateDate} = this.state
@@ -69,12 +67,12 @@ class TimeMachineForm extends Component{
           <span  id="title-char-3">l</span>
           <span  id="title-char-4">o</span>
           <span  id="title-char-5">r</span>
-          <span className="tm-input-word" id="tm-input-word-3">by</span>
-          <span className="tm-input-word" id="tm-input-word-4">week</span>
-          <span className="tm-input-word" id="tm-input-word-5">with</span>
-          <span className="tm-input-word" id="tm-input-word-6">list</span>
-          <span className="tm-input-word" id="tm-input-word-7">of</span>
-          <span className="tm-input-word" id="tm-input-word-8">categories</span>
+          <span className="tm-input-word" id="tm-input-word-3">a</span>
+          <span className="tm-input-word" id="tm-input-word-4">previous</span>
+          <span className="tm-input-word" id="tm-input-word-5">day</span>
+          <span className="tm-input-word" id="tm-input-word-6">by</span>
+          <span className="tm-input-word" id="tm-input-word-7">given</span>
+          <span className="tm-input-word" id="tm-input-word-8">hours</span>
         </div>
         <form className="input-location-form">
           <div className="input-form-container">

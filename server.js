@@ -7,11 +7,17 @@ app.get('/bundle', (req, res) => {
 })
 
 app.get('/', (req, res) => {
-  res.status(200).sendFile(__dirname+'/index.html')
+  res.status(200).sendFile(__dirname+'/public/index.html')
 })
+
+app.get('/api/v1/weather', (req, res) => {
+
+})
+
+
 
 app.listen(port, ()=> {
   console.log("listening on port " + port)
 })
 
-module.exports = app
+module.exports = app`
