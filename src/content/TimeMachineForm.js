@@ -14,7 +14,6 @@ class TimeMachineForm extends Component{
       showError:false
     }
     this.onChange = (address) => this.setState({ address })
-    this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(date) {
@@ -83,7 +82,7 @@ class TimeMachineForm extends Component{
               showMonthDropdown
               placeholderText="Click to select a date"
               selected={this.state.stateDate}
-              onChange={this.handleChange}
+              onChange={this.handleChange.bind(this)}
               />
             <select id="categories-input" onChange={(e)=>{console.log(e.target.value)}}>
               <option value="temperature">temperature</option>
@@ -100,27 +99,4 @@ class TimeMachineForm extends Component{
     )
   }
 }
-
-
-
-
-// <div className="input-form-container">
-//   <input
-//     placeholder="city"
-//     value={this.state.city}
-//     onChange={(e)=>{this.handleInput(e.target.value,"city")}}
-//    />
-//   <input
-//     placeholder="state"
-//     value={this.state.state}
-//     onChange={(e)=>{this.handleInput(e.target.value,"state")}}
-//    />
-// </div>
-// <input
-//   placeholder="date mm/dd/yyyy"
-//   type="date"
-//   value={this.state.date}
-//   onChange={(e)=>{this.handleInput(e.target.value,"date")}}
-// />
-
 export default TimeMachineForm

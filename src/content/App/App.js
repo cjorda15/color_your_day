@@ -22,26 +22,10 @@ class App extends Component{
 
   apiCall(lat,lng,time){
     const url = 'https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/'
-    const urlQuery = time? `${lat},${lng},${time}` : `${lat},${lng}`
-      // if(updateInput){
-      //   geocoder.geocode(`${lat}, ${lng}`, ( err, data ) => {
-      //     location = data.results[0].geometry.location
-      //     console.log("hey")
-      //
-
-      //     // fetch(`${url}/${WEATHER_API_KEY}/${location.lat},${location.lng}`)
-      //     fetch(`${url}/${WEATHER_API_KEY}/${location.lat},${location.lng},15042422`)
-      //     .then(blob => blob.json())
-      //     .then(data => {
-      //       this.props.handleUpdateWeather(data),
-      //       this.getLocation(data.latitude,data.longitude)
-      //       this.setState({loading:false})
-      //       })
-      //     })
-      //   return
-      // }
+    const param = time? `${lat},${lng},${time}` : `${lat},${lng}`
+    const query = `exclude=flags,minutely`
       this.setState({lat:lat,lng:lng,loading:true})
-      fetch(`${url}/${WEATHER_API_KEY}/${urlQuery}`)
+      fetch(`${url}/${WEATHER_API_KEY}/${param}?${query}`)
       .then(blob => blob.json())
       .then(data => {
         this.props.handleUpdateWeather(data),
