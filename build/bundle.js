@@ -56693,9 +56693,9 @@ var _react = __webpack_require__(28);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _TimeMachineInput = __webpack_require__(390);
+var _TimeMachineForm = __webpack_require__(612);
 
-var _TimeMachineInput2 = _interopRequireDefault(_TimeMachineInput);
+var _TimeMachineForm2 = _interopRequireDefault(_TimeMachineForm);
 
 var _WeatherAnimation = __webpack_require__(391);
 
@@ -56746,29 +56746,27 @@ var App = function (_Component) {
     }
   }, {
     key: 'apiCall',
-    value: function apiCall(lat, lng) {
-      var _this2 = this;
-
-      var url = 'https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/';
-      this.setState({ lat: lat, lng: lng, loading: true });
-      fetch(url + '/' + "890aa95a8628c31f30f1c9540168cbdc" + '/' + lat + ',' + lng).then(function (blob) {
-        return blob.json();
-      }).then(function (data) {
-        _this2.props.handleUpdateWeather(data), _this2.getLocation(data.latitude, data.longitude);
-        _this2.setState({ loading: false });
-      }).catch(function (err) {
-        return console.log(err);
-      });
+    value: function apiCall(lat, lng, type) {
+      // const url = 'https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/'
+      //   this.setState({lat:lat,lng:lng,loading:true})
+      //   fetch(`${url}/${WEATHER_API_KEY}/${lat},${lng}`)
+      //   .then(blob => blob.json())
+      //   .then(data => {
+      //     this.props.handleUpdateWeather(data),
+      //     this.getLocation(data.latitude,data.longitude)
+      //     this.setState({loading:false})
+      //   })
+      //   .catch(err => console.log(err))
     }
   }, {
     key: 'getLocation',
     value: function getLocation(lat, lng) {
-      var _this3 = this;
+      var _this2 = this;
 
       geocoder.reverseGeocode(lat, lng, function (err, data) {
         var formatted_address = data.results[0].formatted_address;
 
-        _this3.props.handleLocation(formatted_address);
+        _this2.props.handleLocation(formatted_address);
       });
     }
   }, {
@@ -56779,6 +56777,8 @@ var App = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
+      var _this3 = this;
+
       return _react2.default.createElement(
         'div',
         { className: this.handleBackground() + " weather app-container" },
@@ -56841,7 +56841,9 @@ var App = function (_Component) {
             weather: this.props.weather
           })
         ),
-        _react2.default.createElement(_TimeMachineInput2.default, null)
+        _react2.default.createElement(_TimeMachineForm2.default, { handleCall: function handleCall() {
+            _this3.apiCall.bind(_this3);
+          } })
       );
     }
   }]);
@@ -56854,138 +56856,7 @@ var App = function (_Component) {
 exports.default = App;
 
 /***/ }),
-/* 390 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(28);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var TimeMachineInput = function (_Component) {
-  _inherits(TimeMachineInput, _Component);
-
-  function TimeMachineInput(props) {
-    _classCallCheck(this, TimeMachineInput);
-
-    var _this = _possibleConstructorReturn(this, (TimeMachineInput.__proto__ || Object.getPrototypeOf(TimeMachineInput)).call(this, props));
-
-    _this.state = {
-      city: "",
-      state: "",
-      showError: false
-    };
-    return _this;
-  }
-
-  _createClass(TimeMachineInput, [{
-    key: "handleInput",
-    value: function handleInput(input, type) {
-      this.setState(_defineProperty({}, type, input));
-    }
-  }, {
-    key: "handleError",
-    value: function handleError() {
-      var _this2 = this;
-
-      this.setState({ showError: true });
-      setTimeout(function () {
-        _this2.setState({ showError: false });
-      }, 2000);
-    }
-  }, {
-    key: "handleSubmit",
-    value: function handleSubmit(e) {
-      e.preventDefault();
-      var _state = this.state,
-          city = _state.city,
-          state = _state.state;
-
-      if (!city || !state) {
-        this.handleError();
-        return;
-      }
-      this.props.handleCall(city, state);
-      this.setState({ city: "", state: "" });
-    }
-  }, {
-    key: "errorMessage",
-    value: function errorMessage() {
-      if (this.state.showError) {
-        return _react2.default.createElement(
-          "div",
-          { className: "error-message" },
-          "error, need city and state/country filled in"
-        );
-      }
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this3 = this;
-
-      return _react2.default.createElement(
-        "div",
-        { className: "time-machine-input-container" },
-        _react2.default.createElement(
-          "p",
-          null,
-          "or color a location by range of dates in certain intervals"
-        ),
-        _react2.default.createElement(
-          "form",
-          { className: "input-location-form" },
-          _react2.default.createElement("input", {
-            placeholder: "city",
-            value: this.state.city,
-            onChange: function onChange(e) {
-              _this3.handleInput(e.target.value, "city");
-            }
-          }),
-          _react2.default.createElement("input", {
-            placeholder: "state/country",
-            value: this.state.state,
-            onChange: function onChange(e) {
-              _this3.handleInput(e.target.value, "state");
-            }
-          }),
-          _react2.default.createElement(
-            "button",
-            { onClick: function onClick(e) {
-                _this3.handleSubmit(e);
-              } },
-            "submit"
-          )
-        ),
-        this.errorMessage()
-      );
-    }
-  }]);
-
-  return TimeMachineInput;
-}(_react.Component);
-
-exports.default = TimeMachineInput;
-
-/***/ }),
+/* 390 */,
 /* 391 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -57025,7 +56896,7 @@ var WeatherAnimation = function (_Component) {
     _this.state = {
       icon: "RAIN",
       color: 'goldenrod',
-      size: 152,
+      size: 100,
       animate: _this.props.shouldAnimate
     };
     return _this;
@@ -93125,7 +92996,7 @@ exports.i(__webpack_require__(608), "");
 exports.i(__webpack_require__(609), "");
 
 // module
-exports.push([module.i, "* {\n  box-sizing: border-box;\n  padding: 0px;\n  margin: 0px; }\n\nhtml, body, #root {\n  margin: 0;\n  height: 100%; }\n\nbody {\n  font-family: 'Indie Flower', cursive; }\n\n.Map-wrapper {\n  height: 200px;\n  width: 100%; }\n", ""]);
+exports.push([module.i, "* {\n  box-sizing: border-box;\n  padding: 0px;\n  margin: 0px; }\n\nhtml {\n  margin: 0px;\n  height: 100%;\n  width: 100%; }\n\nbody {\n  font-family: 'Indie Flower', cursive;\n  margin: 0px;\n  min-height: 100%;\n  width: 100%; }\n\n#root {\n  height: 250vh; }\n\n.Map-wrapper {\n  height: 200px;\n  width: 100%; }\n", ""]);
 
 // exports
 
@@ -93139,7 +93010,7 @@ exports = module.exports = __webpack_require__(71)(undefined);
 
 
 // module
-exports.push([module.i, ".app-container{\n  height: 100%;\n}\n\n#central-container{\n  position: relative;\n}\n\n#central-container canvas{\n  animation: icons 60s infinite;\n  position: relative;\n  top:-20px;\n}\n\n.title-greeting{\n  font-size: 42px;\n  text-align: center;\n  text-shadow: 2px 2px 1px seagreen;\n}\n\n#title-char-1{\n  color:#7CFC00;\n}\n\n#title-char-2{\n  color:#DB7093;\n}\n\n#title-char-3{\n  color:#87CEFA;\n}\n\n#title-char-4{\n  color:#FFA500;\n}\n\n#title-char-5{\n  color:#DA70D6;\n}\n\n#title-word-2{\n  color:#6A5ACD;\n}\n\n#title-word-3{\n  color:#ADFF2F;\n}\n\n.mapboxgl-ctrl-top-right{\n  display: flex;\n  justify-content: space-between;\n  width: 100%;\n}\n\n.mapboxgl-ctrl-geocoder{\n  height: 40px;\n}\n\n#map-tip{\n  background: #fff;\n  border-radius: 20px;\n  bottom: 0;\n  color: #ff0000;\n  padding: 3px;\n  position: absolute;\n  left: 25%;\n  z-index: 5;\n}\n\n.weather-map-container{\n  position: relative;\n}\n\n#location-content{\n  text-shadow: 1px 1px 12px #fff;\n}\n\n@keyframes icons {\n  0%   {\n        left: 10%;\n       }\n  50%  {\n        left:60%;\n      }\n  100% {\n        left: 10%;\n    }\n}\n", ""]);
+exports.push([module.i, ".app-container{\n  height: 100%;\n}\n\n#central-container{\n  position: absolute;\n}\n\n#central-container canvas{\n  animation: icons 60s infinite;\n  position: relative;\n  top:-20px;\n}\n\n.title-greeting{\n  font-size: 42px;\n  text-align: center;\n  text-shadow: 2px 2px 1px seagreen;\n}\n\n#title-char-1{\n  color:#7CFC00;\n}\n\n#title-char-2{\n  color:#DB7093;\n}\n\n#title-char-3{\n  color:#87CEFA;\n}\n\n#title-char-4{\n  color:#FFA500;\n}\n\n#title-char-5{\n  color:#DA70D6;\n}\n\n#title-word-2{\n  color:#6A5ACD;\n}\n\n#title-word-3{\n  color:#ADFF2F;\n}\n\n.mapboxgl-ctrl-top-right{\n  display: flex;\n  justify-content: space-between;\n  width: 100%;\n}\n\n.mapboxgl-ctrl-geocoder{\n  height: 40px;\n}\n\n#map-tip{\n  background: #fff;\n  border-radius: 20px;\n  bottom: 0;\n  color: #ff0000;\n  padding: 3px;\n  position: absolute;\n  left: 25%;\n  z-index: 5;\n}\n\n.weather-map-container{\n  position: relative;\n}\n\n#location-content{\ntext-shadow: 2px 2px 1px lightseagreen\n}\n\n@keyframes icons {\n  0%   {\n        left: 10%;\n       }\n  50%  {\n        left:60%;\n      }\n  100% {\n        left: 10%;\n    }\n}\n", ""]);
 
 // exports
 
@@ -93153,7 +93024,7 @@ exports = module.exports = __webpack_require__(71)(undefined);
 
 
 // module
-exports.push([module.i, ".error-message{\n  background: rgba(0,0,0,.9);\n  color:#fff;\n  height: 100vw;\n  font-size:2em;\n  padding: 25%;\n  position: absolute;\n  top: 50%;\n  width: 100vw;\n}\n\n.time-machine-input-container{\n  align-items: center;\n  display: flex;\n  flex-direction: column;\n  max-width: 300px;\n  margin: 10px auto;\n}\n\n.input-location-form{\n  display: flex;\n}\n\n\n.input-location-form input, button{\n  font-family: 'Indie Flower', cursive;\n  font-size: 1.3em;\n}\n\n.input-location-form button :hover{\n  background: #6495ed;\n  border-width: 0px;\n  color:#1a1a1a;\n  font-size: 20px;\n  transition: all .4s;\n}\n\n.input-location-form button{\n  background: #1a1a1a;\n  border: 2px solid #6495ed;\n  color:#6495ed;\n  font-size: 19px;\n  height: 44px;\n}\n\n.input-location-form input{\npadding-left: 5px;\nfont-size: 24px;\n}\n", ""]);
+exports.push([module.i, ".error-message{\n  background: rgba(0,0,0,.9);\n  color:#fff;\n  height: 100vw;\n  font-size:2em;\n  padding: 25%;\n  position: relative;\n  top: -30%;\n  width: 100vw;\n}\n\n.time-machine-form-container{\n  align-items: center;\n  display: flex;\n  flex-direction: column;\n  max-width: 300px;\n  margin: 10px auto;\n}\n\n.input-location-form{\n  display: flex;\n}\n\n\n.input-location-form input, button{\n  font-family: 'Indie Flower', cursive;\n  font-size: 1.3em;\n}\n\n.input-location-form button :hover{\n  background: #6495ed;\n  border-width: 0px;\n  color:#1a1a1a;\n  font-size: 20px;\n  transition: all .4s;\n}\n\n.input-location-form button{\n  background: #1a1a1a;\n  border: 2px solid #6495ed;\n  color:#6495ed;\n  font-size: 19px;\n  height: 44px;\n}\n\n.input-location-form input{\npadding-left: 5px;\nfont-size: 24px;\n}\n\n.tm-input-word{\n  display: inline-block;\n  margin: 0px 6px;\n}\n\n#time-machine-intro{\n  font-size: 2.5em;\n  text-shadow: 2px 2px 7px seagreen;\n}\n\n#tm-input-word-1{\n  color:#87CEFA;\n\n}\n\n#tm-input-word-3{\n  color:#DB7093;\n\n}\n\n#tm-input-word-4{\n  color:#FFA500;\n\n}\n\n#tm-input-word-5{\n  color:#7CFC00;\n\n}\n\n#tm-input-word-6{\n  color:#6A5ACD;\n\n}\n\n#tm-input-word-7{\n  color:#ADFF2F;\n\n}\n\n#tm-input-word-8{\n  color:#DB7093;\n\n}\n\n#tm-input-word-9{\n  color:#87CEFA;\n\n}\n\n#tm-input-word-10{\n  color:#7CFC00;\n\n}\n\n#tm-input-word-11{\n  color:#6A5ACD;\n}\n", ""]);
 
 // exports
 
@@ -93639,6 +93510,13 @@ module.exports = function (css) {
 	return fixedCss;
 };
 
+
+/***/ }),
+/* 612 */
+/***/ (function(module, exports) {
+
+"use strict";
+throw new Error("Module build failed: SyntaxError: Unexpected token, expected , (12:6)\n\n\u001b[0m \u001b[90m 10 | \u001b[39m      interval\u001b[33m:\u001b[39m\u001b[32m\"\"\u001b[39m\u001b[33m,\u001b[39m\n \u001b[90m 11 | \u001b[39m      date\u001b[33m:\u001b[39m\u001b[32m\"\"\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 12 | \u001b[39m      showError\u001b[33m:\u001b[39m\u001b[36mfalse\u001b[39m\n \u001b[90m    | \u001b[39m      \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 13 | \u001b[39m    }\n \u001b[90m 14 | \u001b[39m  }\n \u001b[90m 15 | \u001b[39m\u001b[0m\n");
 
 /***/ })
 /******/ ]);

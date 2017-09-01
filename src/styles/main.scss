@@ -9,13 +9,21 @@
   margin: 0px;
 }
 
-html, body, #root {
-    margin: 0;
-    height: 100%;
+html {
+   margin: 0px;
+   height: 100%;
+   width: 100%;
 }
 
-body{
+body {
   font-family: 'Indie Flower', cursive;
+   margin: 0px;
+   min-height: 100%;
+   width: 100%;
+}
+
+#root{
+  height: 250vh;
 }
 
 .Map-wrapper {

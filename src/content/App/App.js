@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import TimeMachineInput from '../TimeMachineInput'
+import TimeMachineInput from '../TimeMachineForm'
 import WeatherAnimation from '../WeatherAnimation'
 import WeatherMap from '../WeatherMap'
 import WeatherInfo from '../WeatherInfo'
@@ -20,17 +20,17 @@ class App extends Component{
     this.apiCall(lat, lng)
   }
 
-  apiCall(lat,lng){
-    const url = 'https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/'
-      this.setState({lat:lat,lng:lng,loading:true})
-      fetch(`${url}/${WEATHER_API_KEY}/${lat},${lng}`)
-      .then(blob => blob.json())
-      .then(data => {
-        this.props.handleUpdateWeather(data),
-        this.getLocation(data.latitude,data.longitude)
-        this.setState({loading:false})
-      })
-      .catch(err => console.log(err))
+  apiCall(lat,lng,type){
+    // const url = 'https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/'
+    //   this.setState({lat:lat,lng:lng,loading:true})
+    //   fetch(`${url}/${WEATHER_API_KEY}/${lat},${lng}`)
+    //   .then(blob => blob.json())
+    //   .then(data => {
+    //     this.props.handleUpdateWeather(data),
+    //     this.getLocation(data.latitude,data.longitude)
+    //     this.setState({loading:false})
+    //   })
+    //   .catch(err => console.log(err))
  }
 
  getLocation(lat,lng){
@@ -73,7 +73,7 @@ class App extends Component{
             weather={this.props.weather}
           />
         </div>
-        <TimeMachineInput/>
+        <TimeMachineInput handleCall={()=>{this.apiCall.bind(this)}}/>
       </div>
     )
   }

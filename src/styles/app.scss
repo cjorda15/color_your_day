@@ -3,7 +3,7 @@
 }
 
 #central-container{
-  position: relative;
+  position: absolute;
 }
 
 #central-container canvas{
@@ -72,7 +72,7 @@
 }
 
 #location-content{
-  text-shadow: 1px 1px 12px #fff;
+text-shadow: 2px 2px 1px lightseagreen
 }
 
 @keyframes icons {
