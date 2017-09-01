@@ -1,7 +1,7 @@
 import { expect } from 'chai'
-import { updateWeather, UPDATE_LOCATION } from '../src/actions'
+import { updateWeather, updateLocation } from '../src/actions'
 
-describe('updateWeather action', () => {
+describe('actions test', () => {
 
  it('should update the weather', () => {
    const weather = 'sunny day around here'
@@ -11,5 +11,15 @@ describe('updateWeather action', () => {
    }
    expect(updateWeather(weather)).to.eql(expectedAction)
  })
+
+ it('should update the location', () => {
+   const weather = 'NY, NY'
+   const expectedAction = {
+     type: 'UPDATE_LOCATION',
+     payload : 'NY, NY'
+   }
+   expect(updateLocation(weather)).to.eql(expectedAction)
+ })
+
 
 })
