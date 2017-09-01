@@ -1,22 +1,24 @@
 import React, {Component} from 'react'
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import moment from 'moment';
+import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
+
 
 class TimeMachineForm extends Component{
   constructor(props){
     super(props)
     this.state = {
-      city:"",
-      state:"",
-      date:"",
+      address:'San Francisco, CA',
+      stateDate:moment(),
       showError:false
     }
+    this.onChange = (address) => this.setState({ address })
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(date) {
-    console.log(date)
-  this.setState({date: date});
+  this.setState({stateDate: date});
 }
 
   handleInput(input,type){
@@ -28,25 +30,37 @@ class TimeMachineForm extends Component{
     setTimeout(()=>{this.setState({showError:false})},2000)
   }
 
+
+
   handleSubmit(e){
-    // const date =
     e.preventDefault()
-    const {city,state} = this.state
-    if(!city || !state){
+    const {address,stateDate} = this.state
+    const date = stateDate.utc().format().slice(0,10)
+    const dateTime = Math.floor(new Date(date)/1000);
+
+    if(!address||!stateDate){
       this.handleError()
       return
     }
-    this.props.handleCall(city,state,true,date)
-    this.setState({city:"",state:""})
+
+    geocodeByAddress(this.state.address)
+     .then(results => getLatLng(results[0]))
+     .then(location => this.props.handleCall(location.lat,location.lng,dateTime))
+     .catch(error => console.error('Error', error))
   }
 
   errorMessage(){
     if(this.state.showError){
-     return <div className="error-message">error, need city and state/country filled in</div>
+     return <div className="error-message">error, need all input fields filled out</div>
    }
   }
 
   render(){
+    const inputProps = {
+      value: this.state.address,
+      onChange: this.onChange,
+      placeholder: 'Search Places...'
+    }
     return(
       <div className="time-machine-form-container">
         <div id="time-machine-intro">
@@ -65,22 +79,12 @@ class TimeMachineForm extends Component{
         </div>
         <form className="input-location-form">
           <div className="input-form-container">
-            <input
-              placeholder="city"
-              value={this.state.city}
-              onChange={(e)=>{this.handleInput(e.target.value,"city")}}
-             />
-            <input
-              placeholder="state"
-              value={this.state.state}
-              onChange={(e)=>{this.handleInput(e.target.value,"state")}}
-             />
-          </div>
-          <div className="input-form-container">
             <DatePicker
-              selected={this.state.startDate}
+              showMonthDropdown
+              placeholderText="Click to select a date"
+              selected={this.state.stateDate}
               onChange={this.handleChange}
-              />;
+              />
             <select id="categories-input" onChange={(e)=>{console.log(e.target.value)}}>
               <option value="temperature">temperature</option>
               <option value="humidity">humidity</option>
@@ -88,6 +92,7 @@ class TimeMachineForm extends Component{
               <option value="cloudCover">cloudCover</option>
             </select>
            </div>
+           <PlacesAutocomplete inputProps={inputProps} />
           <button onClick={(e)=>{this.handleSubmit(e)}}>submit</button>
           </form>
           {this.errorMessage()}
@@ -96,6 +101,21 @@ class TimeMachineForm extends Component{
   }
 }
 
+
+
+
+// <div className="input-form-container">
+//   <input
+//     placeholder="city"
+//     value={this.state.city}
+//     onChange={(e)=>{this.handleInput(e.target.value,"city")}}
+//    />
+//   <input
+//     placeholder="state"
+//     value={this.state.state}
+//     onChange={(e)=>{this.handleInput(e.target.value,"state")}}
+//    />
+// </div>
 // <input
 //   placeholder="date mm/dd/yyyy"
 //   type="date"

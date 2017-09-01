@@ -17,10 +17,14 @@
 }
 
 .title-greeting{
+  // animation: intro 2.5s;
   font-size: 44px;
   padding: 10px;
+  position: relative;
   text-align: center;
   text-shadow: 2px 2px 1px seagreen;
+  top: 0px;
+  z-index: 10;
 }
 
 
@@ -80,6 +84,19 @@
 
 #location-content{
 text-shadow: 2px 2px 6px lightseagreen
+}
+
+//not being used, for top header into animation
+@keyframes intro {
+  0%   {
+        top:200px;
+        font-size: 400px;
+       }
+
+  100% {
+        top:0px;
+        font-size: 44px;
+    }
 }
 
 @keyframes icons {

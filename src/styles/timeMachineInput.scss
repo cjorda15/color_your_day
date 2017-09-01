@@ -11,7 +11,7 @@
 
 .input-location-form input,
 .input-location-form select{
-  width: 240px;
+  width: 257px;
 }
 
 .time-machine-form-container{
@@ -20,6 +20,12 @@
   flex-direction: column;
   margin: 10px auto;
   width: 90%;
+}
+
+#time-machine-intro{
+  font-size: 2.5em;
+  margin-top: 50px;
+  text-shadow: 2px 2px 7px seagreen;
 }
 
 .input-location-form{
@@ -67,18 +73,19 @@
 
 #categories-input{
   height: 45px;
-  background: content-box;
-  color: #fff;
   font-family: 'Indie Flower', cursive;
   font-size: 26px;
-  text-shadow: -4px 0px 8px black;
 }
 
-#time-machine-intro{
-  font-size: 2.5em;
-  margin-top: 50px;
-  text-shadow: 2px 2px 7px seagreen;
+#categories-input,.input-location-form input{
+  background: content-box;
+  color: #DA70D6;
+  text-shadow: 1px 1px 1px green;
+  font-size: 27px;
 }
+
+
+
 
 #tm-input-word-1{
   color:#87CEFA;
@@ -127,4 +134,10 @@
 
 #tm-input-word-11{
   color:#6A5ACD;
+}
+
+@media (max-width:550px){
+  .input-form-container{
+    flex-direction: column;
+  }
 }

@@ -20,28 +20,28 @@ class App extends Component{
     this.apiCall(lat, lng)
   }
 
-  apiCall(lat,lng,updateInput){
+  apiCall(lat,lng,time){
     const url = 'https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/'
-      var location;
-      if(updateInput){
-        geocoder.geocode(`${lat}, ${lng}`, ( err, data ) => {
-          location = data.results[0].geometry.location
-          console.log("hey")
+    const urlQuery = time? `${lat},${lng},${time}` : `${lat},${lng}`
+      // if(updateInput){
+      //   geocoder.geocode(`${lat}, ${lng}`, ( err, data ) => {
+      //     location = data.results[0].geometry.location
+      //     console.log("hey")
+      //
 
-
-          // fetch(`${url}/${WEATHER_API_KEY}/${location.lat},${location.lng}`)
-          fetch(`${url}/${WEATHER_API_KEY}/${location.lat},${location.lng},15042422`)
-          .then(blob => blob.json())
-          .then(data => {
-            this.props.handleUpdateWeather(data),
-            this.getLocation(data.latitude,data.longitude)
-            this.setState({loading:false})
-            })
-          })
-        return
-      }
+      //     // fetch(`${url}/${WEATHER_API_KEY}/${location.lat},${location.lng}`)
+      //     fetch(`${url}/${WEATHER_API_KEY}/${location.lat},${location.lng},15042422`)
+      //     .then(blob => blob.json())
+      //     .then(data => {
+      //       this.props.handleUpdateWeather(data),
+      //       this.getLocation(data.latitude,data.longitude)
+      //       this.setState({loading:false})
+      //       })
+      //     })
+      //   return
+      // }
       this.setState({lat:lat,lng:lng,loading:true})
-      fetch(`${url}/${WEATHER_API_KEY}/${lat},${lng}`)
+      fetch(`${url}/${WEATHER_API_KEY}/${urlQuery}`)
       .then(blob => blob.json())
       .then(data => {
         this.props.handleUpdateWeather(data),
