@@ -61,7 +61,7 @@ class TimeMachineForm extends Component{
             onChange={(e)=>{this.handleInput(e.target.value,"city")}}
           />
           <input
-            placeholder="state/country"
+            placeholder="state"
             value={this.state.state}
             onChange={(e)=>{this.handleInput(e.target.value,"state")}}
            />
@@ -74,7 +74,7 @@ class TimeMachineForm extends Component{
             onChange={(e)=>{this.handleInput(e.target.value,"date")}}
           />
         </div>
-        <select onChange={(e)=>{console.log(e.target.value)}}>
+        <select id="categories-input" onChange={(e)=>{console.log(e.target.value)}}>
           <option value="temperature">temperature</option>
           <option value="humidity">humidity</option>
           <option value="windSpeed">windSpeed</option>

@@ -5,16 +5,21 @@
   font-size:2em;
   padding: 25%;
   position: relative;
-  top: -30%;
+  top: -100%;
   width: 100vw;
+}
+
+.input-location-form input,
+.input-location-form select{
+  width: 240px;
 }
 
 .time-machine-form-container{
   align-items: center;
   display: flex;
   flex-direction: column;
-  max-width: 300px;
   margin: 10px auto;
+  width: 90%;
 }
 
 .input-location-form{
@@ -28,20 +33,20 @@
   font-size: 1.3em;
 }
 
-.input-location-form button :hover{
-  background: #6495ed;
-  border-width: 0px;
-  color:#1a1a1a;
-  font-size: 20px;
-  transition: all .4s;
-}
-
 .input-location-form button{
   background: #1a1a1a;
   border: 2px solid #6495ed;
   color:#6495ed;
   font-size: 19px;
   height: 44px;
+}
+
+.input-location-form button:hover{
+  background: #6495ed;
+  border-width: 0px;
+  color:#1a1a1a;
+  font-size: 20px;
+  transition: all .4s;
 }
 
 .input-location-form input{
@@ -54,8 +59,18 @@ font-size: 24px;
   margin: 0px 6px;
 }
 
+#categories-input{
+  height: 45px;
+  background: content-box;
+  color: #fff;
+  font-family: 'Indie Flower', cursive;
+  font-size: 26px;
+  text-shadow: -4px 0px 8px black;
+}
+
 #time-machine-intro{
   font-size: 2.5em;
+  margin-top: 50px;
   text-shadow: 2px 2px 7px seagreen;
 }
 

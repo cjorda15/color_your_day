@@ -26,7 +26,11 @@ class App extends Component{
       if(updateInput){
         geocoder.geocode(`${lat}, ${lng}`, ( err, data ) => {
           location = data.results[0].geometry.location
-          fetch(`${url}/${WEATHER_API_KEY}/${location.lat},${location.lng}`)
+          console.log("hey")
+
+
+          // fetch(`${url}/${WEATHER_API_KEY}/${location.lat},${location.lng}`)
+          fetch(`${url}/${WEATHER_API_KEY}/42.3601,-71.0589,409467600`)
           .then(blob => blob.json())
           .then(data => {
             this.props.handleUpdateWeather(data),
@@ -77,7 +81,7 @@ class App extends Component{
           id="weather-map"
           handleApiCall={this.apiCall.bind(this)}
          />
-        <p id="location-content" className='title-greeting'>{this.props.location?this.props.location:null}</p>
+        <p id="location-content">{this.props.location?this.props.location:null}</p>
         <WeatherInfo
           weather={this.props.weather}
           />
