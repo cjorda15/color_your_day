@@ -2,6 +2,7 @@
 @import url('timeMachineInput.css');
 @import url('weatherInfo.css');
 @import url('backgroundAnimation.css');
+@import url('WeeklyReport.css');
 
 *{
   box-sizing: border-box;

@@ -13,15 +13,15 @@ class WeatherAnimation extends Component{
   }
 
   updateAnimationValues(){
-    if(this.props.weather){
-      return this.props.weather.currently.icon.toUpperCase().split('')
+    if(this.props.icon){
+      return this.props.icon.toUpperCase().split('')
              .map(char => char=="-"?"_":char).join('')
     }
     return "RAIN"
   }
   updateColor(){
-    if(this.props.weather){
-      switch(this.props.weather.currently.icon){
+    if(this.props.icon){
+      switch(this.props.icon){
         case 'clear-day':
           return  '#f4eb42'
         case 'partly-cloudy-day':

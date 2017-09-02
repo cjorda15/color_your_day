@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import TimeMachineForm from '../TimeMachineForm'
-import WeatherAnimation from '../WeatherAnimation'
 import WeatherMap from '../WeatherMap'
 import WeatherInfo from '../WeatherInfo'
+import WeeklyReport from '../WeeklyReport'
+import WeatherAnimation from '../WeatherAnimation'
 import darkSkyApiCall from '../../helper/darkSkyApiCall'
 const geocoder = require('geocoder')
 
@@ -42,6 +43,24 @@ class App extends Component{
       "clear-day"
    }
 
+  weeklyReport(){
+  const { weather } = this.props
+    if(!weather)return null
+    const data = weather.daily.data.length===1?weather.hourly.data:weather.daily.data
+    return  data.map((data,i) => {
+      return (
+      <WeeklyReport
+        summary={data.summary}
+        icon ={data.icon}
+        temperatureMin = {data.temperatureMin}
+        temperatureMax = {data.temperatureMax}
+        time={data.time}
+        key={i}
+        />
+      )
+    })
+  }
+
   render(){
     return(
       <div className={this.handleBackground()+ " weather app-container"}>
@@ -63,15 +82,16 @@ class App extends Component{
           weather={this.props.weather}
          />
         <div id="central-container">
+          {this.props.weather?
           <WeatherAnimation
-            weather={this.props.weather}
-           />
+            icon={this.props.weather.currently.icon}
+           />:null}
+          {this.weeklyReport()}
         </div>
         <TimeMachineForm handleCall={this.apiCall.bind(this)}/>
       </div>
     )
   }
 }
-
 
 export default App

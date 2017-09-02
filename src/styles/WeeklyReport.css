@@ -1,0 +1,15 @@
+.weekly-report{
+  border-radius: 30px;
+  padding: 8px;
+}
+
+.weekly-report-time, .weekly-report-temp{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.weekly-report-time{
+  color: #6A5ACD;
+  text-shadow: 1px 1px 1px #ADFF2F;
+}
