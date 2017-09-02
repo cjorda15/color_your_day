@@ -3,6 +3,7 @@
 [Live Site](https://color-your-day.herokuapp.com)
 
 ![site img1](https://imgur.com/Tp4ZhBn)
+![alt text](https://imgur.com/Tp4ZhBn)
 
 
 ## installation
