@@ -1,5 +1,5 @@
 ## color your day
-
+[![CircleCI](https://circleci.com/gh/cjorda15/color_your_day.svg?style=svg)](https://circleci.com/gh/cjorda15/color_your_day)
 [Live Site](https://color-your-day.herokuapp.com)
 
 ![site img1](https://i.imgur.com/Tp4ZhBn.png)
