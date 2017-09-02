@@ -2,6 +2,8 @@
 
 [Live Site](https://color-your-day.herokuapp.com)
 
+![site img1](https://i.imgur.com/Tp4ZhBn.png)
+
 ## installation
 
 `git clone git@github.com:cjorda15/color_your_day.git`<br/>
@@ -9,4 +11,5 @@
 `npm install`<br/>
 `webpack`<br/>
 `npm start`<br/>
-### check http://localhost:3000/ 
+### check http://localhost:3000/
+![site img2](https://i.imgur.com/NQjOjgf.png)
