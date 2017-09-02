@@ -1,4 +1,3 @@
-# Chris Jordan
 ## color your day
 
 [Live Site](https://color-your-day.herokuapp.com)
