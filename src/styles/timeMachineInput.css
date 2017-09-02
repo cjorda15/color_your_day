@@ -9,7 +9,7 @@
 #time-machine-intro{
   font-size: 2.5em;
   margin-top: 50px;
-  text-shadow: 2px 2px 7px seagreen;
+  text-shadow: 2px 2px 7px #7DB1A8;
 }
 
 .input-location-form{
@@ -60,8 +60,8 @@
 
 #categories-input,.input-location-form input{
   background: content-box;
-  color: lightseagreen;
-  text-shadow: 2px 1px 1px green;
+  color: #20B2AA;
+  text-shadow: 2px 1px 1px #248F2F;
   font-size: 27px;
 }
 
