@@ -1,5 +1,5 @@
 const chai = require('chai');
-const should = chai.should;
+const should = chai.should();
 const chaiHttp = require('chai-http');
 const server = require('../server');
 
@@ -10,7 +10,7 @@ describe('Client Routes', () => {
     chai.request(server)
     .get('/')
     .end((err, response) => {
-      response.should.have.status(200)
+      expect(response.status).toEqual(200)
       done()
     })
   })
@@ -19,7 +19,7 @@ describe('Client Routes', () => {
     chai.request(server)
     .get('/sadness')
     .end((err, response) => {
-      response.should.have.status(404)
+      expect(response.status).toEqual(404)
       done()
     })
   })

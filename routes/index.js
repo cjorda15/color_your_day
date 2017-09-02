@@ -1,8 +1,8 @@
 const express = require('express')
 const r = express.Router()
-const user = require('./models/weather')
+const weather = require('./models/weather')
 
 
-r.get('/weather', user.login)
+r.get('/weather', weather)
 
 module.exports = r

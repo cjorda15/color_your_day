@@ -3,7 +3,7 @@ const app = express()
 const fetch = require('node-fetch');
 const bodyParser = require('body-parser');
 const port = process.env.PORT ||3000
-const routes = require('./routes')
+const routes = require('./routes/index.js')
 
 require('dotenv').config()
 
@@ -17,19 +17,6 @@ app.get('/bundle', (req, res) => {
 
 app.get('/', (req, res) => {
   res.status(200).sendFile(__dirname+'/public/index.html')
-})
-
-app.get('/api/v1/weather', (req, res) => {
-  const param = req.query.query
-  const url = 'https://api.darksky.net/forecast'
-  const query = `exclude=flags,minutely`
-  console.log(param,"!!!")
-    fetch(`${url}/${process.env.WEATHER_API_KEY}/${param}?${query}`,{
-       method: 'GET'
-})
-    .then(blob => blob.json())
-    .then(data => { res.send(data)})
-    .catch(err => console.log(err))
 })
 
 app.listen(port, ()=> {

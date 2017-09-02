@@ -2,8 +2,10 @@
   "name": "challenge",
   "version": "1.0.0",
   "main": "server.js",
-  "directories": {
-    "test": "test"
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(css|scss)$": "<rootDir>/__mocks__/styleMock.js"
+    }
   },
   "dependencies": {
     "babel-core": "^6.26.0",
@@ -53,13 +55,16 @@
     "webpack": "^3.5.5"
   },
   "devDependencies": {
+    "gl": "^4.0.4",
     "ignore-styles": "^5.0.1",
-    "mocha": "^3.5.0"
+    "jest-css-modules": "^1.1.0",
+    "jsdom": "^11.2.0",
+    "mocha": "^3.5.0",
+    "sinon": "^3.2.1"
   },
   "scripts": {
-    "test": "mocha --compilers js:babel-core/register --require ignore-styles",
-    "start": "node server.js",
-    "jest": "jest"
+    "test": "jest",
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",

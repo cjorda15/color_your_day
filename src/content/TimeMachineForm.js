@@ -4,7 +4,6 @@ import 'react-datepicker/dist/react-datepicker.css';
 import moment from 'moment';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
 
-
 class TimeMachineForm extends Component{
   constructor(props){
     super(props)
@@ -92,6 +91,7 @@ class TimeMachineForm extends Component{
   }
 }
 /// in case by category becomes a thing
+
 // <select id="categories-input" onChange={(e)=>{console.log(e.target.value)}}>
 //   <option value="temperature">temperature</option>
 //   <option value="humidity">humidity</option>
