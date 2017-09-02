@@ -1,7 +1,7 @@
-@import url('app.scss');
-@import url('timeMachineInput.scss');
-@import url('weatherInfo.scss');
-@import url('backgroundAnimation.scss');
+@import url('app.css');
+@import url('timeMachineInput.css');
+@import url('weatherInfo.css');
+@import url('backgroundAnimation.css');
 
 *{
   box-sizing: border-box;

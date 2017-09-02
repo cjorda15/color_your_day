@@ -35,7 +35,7 @@ class WeatherAnimation extends Component{
         case 'partly-cloudy-night':
           return  '#86d8ae'
         case 'rain':
-          return  '#47ff65'
+          return  '#3751d3'
         case 'snow':
           return  '#3751d3'
         default:
