@@ -3,11 +3,13 @@ const app = express()
 const fetch = require('node-fetch');
 const bodyParser = require('body-parser');
 const port = process.env.PORT ||3000
+const routes = require('./routes')
 
 require('dotenv').config()
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use('/api/v1',routes)
 
 app.get('/bundle', (req, res) => {
   res.sendFile(__dirname+"/build/bundle.js")
@@ -29,8 +31,6 @@ app.get('/api/v1/weather', (req, res) => {
     .then(data => { res.send(data)})
     .catch(err => console.log(err))
 })
-
-
 
 app.listen(port, ()=> {
   console.log("listening on port " + port)
