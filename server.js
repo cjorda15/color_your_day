@@ -18,7 +18,6 @@ app.get('/', (req, res) => {
 })
 
 app.get('/api/v1/weather', (req, res) => {
-  console.log(req.query,"!@#$@#$")
   const param = req.query.query
   const url = 'https://api.darksky.net/forecast'
   const query = `exclude=flags,minutely`

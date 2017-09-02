@@ -71,6 +71,10 @@
   margin: 0px 6px;
 }
 
+.react-datepicker-popper{
+  z-index: 10;
+}
+
 #categories-input{
   height: 45px;
   font-family: 'Indie Flower', cursive;

@@ -10,7 +10,6 @@ class App extends Component{
   constructor(props){
     super(props)
     this.state = {
-      loading:false,
       lat: 40.016457,
       lng: -105.285884
     }
@@ -23,9 +22,10 @@ class App extends Component{
 
   apiCall(lat,lng,time){
     darkSkyApiCall(lat,lng,time,
-                  this.props.handleUpdateWeather.bind(this),
-                  this.getLocation.bind(this),
-                  this.setState.bind(this))
+                    this.props.handleUpdateWeather.bind(this),
+                    this.getLocation.bind(this),
+                    this.setState.bind(this)
+                  )
  }
 
  getLocation(lat,lng){
@@ -64,7 +64,6 @@ class App extends Component{
          />
         <div id="central-container">
           <WeatherAnimation
-            shouldAnimate={!this.state.loading}
             weather={this.props.weather}
            />
         </div>

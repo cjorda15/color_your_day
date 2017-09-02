@@ -11,7 +11,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     handleUpdateWeather: (input) => {
       dispatch(updateWeather(input))
-  },
+    },
     handleLocation: (input) => {
       dispatch(updateLocation(input))
     }

@@ -18,7 +18,7 @@ class TimeMachineForm extends Component{
 
   handleChange(date) {
   this.setState({stateDate: date});
-}
+ }
 
   handleInput(input,type){
      this.setState({[type]:input})
@@ -72,7 +72,7 @@ class TimeMachineForm extends Component{
           <span className="tm-input-word" id="tm-input-word-5">day</span>
           <span className="tm-input-word" id="tm-input-word-6">by</span>
           <span className="tm-input-word" id="tm-input-word-7">given</span>
-          <span className="tm-input-word" id="tm-input-word-8">hours</span>
+          <span className="tm-input-word" id="tm-input-word-8">date</span>
         </div>
         <form className="input-location-form">
           <div className="input-form-container">
@@ -91,7 +91,7 @@ class TimeMachineForm extends Component{
     )
   }
 }
-
+/// in case by category becomes a thing
 // <select id="categories-input" onChange={(e)=>{console.log(e.target.value)}}>
 //   <option value="temperature">temperature</option>
 //   <option value="humidity">humidity</option>

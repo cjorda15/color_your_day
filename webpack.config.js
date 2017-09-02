@@ -1,6 +1,8 @@
 const path = require('path')
 const webpack = require('webpack')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 require('dotenv').config()
+
 
 module.exports = {
   entry:["./src/index.js"],
@@ -42,7 +44,8 @@ module.exports = {
     fs:  "empty"
   },
   plugins: [
-  new webpack.DefinePlugin({
+    new ExtractTextPlugin('style.css', { allChunks: true }),
+    new webpack.DefinePlugin({
     'MAP_API_KEY': JSON.stringify(process.env.MAP_API_KEY),
     'WEATHER_API_KEY':JSON.stringify(process.env.WEATHER_API_KEY)
   })

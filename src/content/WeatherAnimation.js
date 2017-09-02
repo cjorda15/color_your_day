@@ -8,7 +8,7 @@ class WeatherAnimation extends Component{
       icon: "RAIN",
       color: 'blue',
       size: 100,
-      animate: this.props.shouldAnimate
+      animate: true
     }
   }
 
@@ -49,10 +49,10 @@ class WeatherAnimation extends Component{
       this.updateAnimationValues()
       return(
         <ReactAnimatedWeather id="weather-animation"
-        icon={this.updateAnimationValues()}
-        color={this.updateColor()}
-        size={this.state.size}
-        animate={this.state.animate}
+          icon={this.updateAnimationValues()}
+          color={this.updateColor()}
+          size={this.state.size}
+          animate={this.state.animate}
         />
       )
     }
