@@ -6,7 +6,7 @@ class WeatherAnimation extends Component{
     super(props)
     this.state={
       icon: "RAIN",
-      color: 'goldenrod',
+      color: 'blue',
       size: 100,
       animate: this.props.shouldAnimate
     }
@@ -18,15 +18,39 @@ class WeatherAnimation extends Component{
              .map(char => char=="-"?"_":char).join('')
     }
     return "RAIN"
-    }
-
+  }
+  updateColor(){
+    if(this.props.weather){
+      switch(this.props.weather.currently.icon){
+        case 'clear-day':
+          return  '#f4eb42'
+        case 'partly-cloudy-day':
+          return  '#cfb7ff'
+        case 'cloudy':
+          return  '#d3f6ff'
+        case 'wind':
+          return  '#ffe7d3'
+        case 'fog':
+          return  '#d3ffdd'
+        case 'partly-cloudy-night':
+          return  '#86d8ae'
+        case 'rain':
+          return  '#47ff65'
+        case 'snow':
+          return  '#3751d3'
+        default:
+          return '#3751d3'
+      }
+  }
+    return "#3751d3"
+  }
 
     render(){
       this.updateAnimationValues()
       return(
         <ReactAnimatedWeather id="weather-animation"
         icon={this.updateAnimationValues()}
-        color={this.state.color}
+        color={this.updateColor()}
         size={this.state.size}
         animate={this.state.animate}
         />

@@ -82,12 +82,6 @@ class TimeMachineForm extends Component{
               selected={this.state.stateDate}
               onChange={this.handleChange.bind(this)}
               />
-            <select id="categories-input" onChange={(e)=>{console.log(e.target.value)}}>
-              <option value="temperature">temperature</option>
-              <option value="humidity">humidity</option>
-              <option value="windSpeed">windSpeed</option>
-              <option value="cloudCover">cloudCover</option>
-            </select>
            </div>
            <PlacesAutocomplete inputProps={inputProps} />
           <button onClick={(e)=>{this.handleSubmit(e)}}>submit</button>
@@ -97,4 +91,12 @@ class TimeMachineForm extends Component{
     )
   }
 }
+
+// <select id="categories-input" onChange={(e)=>{console.log(e.target.value)}}>
+//   <option value="temperature">temperature</option>
+//   <option value="humidity">humidity</option>
+//   <option value="windSpeed">windSpeed</option>
+//   <option value="cloudCover">cloudCover</option>
+// </select>
+
 export default TimeMachineForm
