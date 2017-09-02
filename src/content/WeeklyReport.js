@@ -40,8 +40,15 @@ const WeeklyReport = ({summary,icon,temperatureMin,temperatureMax,time,tempertat
     }
   }
 
+  const backgroundClass = () => {
+    if(tempertatureHourly){
+      return icon
+    }
+    return icon=='partly-cloudy-night'||icon=='night'?  "clear-day" :icon
+  }
+
   return (
-    <section className={`weekly-report weather ${icon}`}>
+    <section className={`weekly-report weather ${backgroundClass()}`}>
       <div className="weekly-report-time">{currentTime()}</div>
       <div className="weekly-report-temp">
         {temperatureReading()}

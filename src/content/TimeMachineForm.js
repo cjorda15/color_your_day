@@ -77,6 +77,7 @@ class TimeMachineForm extends Component{
           <div className="input-form-container">
             <DatePicker
               showMonthDropdown
+              showYearDropdown
               placeholderText="Click to select a date"
               selected={this.state.stateDate}
               onChange={this.handleChange.bind(this)}
@@ -90,13 +91,5 @@ class TimeMachineForm extends Component{
     )
   }
 }
-/// in case by category becomes a thing
-
-// <select id="categories-input" onChange={(e)=>{console.log(e.target.value)}}>
-//   <option value="temperature">temperature</option>
-//   <option value="humidity">humidity</option>
-//   <option value="windSpeed">windSpeed</option>
-//   <option value="cloudCover">cloudCover</option>
-// </select>
 
 export default TimeMachineForm
