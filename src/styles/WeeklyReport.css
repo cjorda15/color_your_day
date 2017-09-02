@@ -4,9 +4,10 @@
 }
 
 .weekly-report-time, .weekly-report-temp{
-  display: flex;
-  justify-content: center;
   align-items: center;
+  display: flex;
+  font-size: 1.3em;
+  justify-content: center;
 }
 
 .weekly-report-time{

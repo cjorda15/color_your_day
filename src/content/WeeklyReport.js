@@ -1,21 +1,14 @@
 import React from 'react'
 import moment from 'moment'
 
-const WeeklyReport = ({summary,icon,temperatureMin,temperatureMax,time}) => {
-  const date = new Date(time*100);
+const WeeklyReport = ({summary,icon,temperatureMin,temperatureMax,time,tempertatureHourly}) => {
+  const date = new Date(time*1000);
   let hours = date.getHours();
-  let minutes = "0" + date.getMinutes();
-
   const currentTime = () => {
-    return moment.unix(time).format("MM/DD/YYYY");
-  }
-
-  const backgroundClass = () => {
-    if((hours>20||hours<5) && (!(icon=='clear-night'||icon=='partly-cloudy-night'))){
-      return "clear-night"
-    }else{
-      return icon
-    }
+  return  tempertatureHourly?
+          moment.unix(time).format("HH:mm")
+            :
+          moment.unix(time).format("MM/DD/YYYY");
   }
 
   const backgroundColor = (input) => {
@@ -30,13 +23,29 @@ const WeeklyReport = ({summary,icon,temperatureMin,temperatureMax,time}) => {
     return {color:color}
   }
 
+  const temperatureReading = () => {
+    if(tempertatureHourly){
+      return (<span className="daily-temperature-reading"
+              style={backgroundColor(tempertatureHourly)}>
+              {tempertatureHourly}°
+            </span>
+          )
+    }else{
+      return(
+        <div className="daily-temperature-reading">
+          <span style={backgroundColor(temperatureMax)}>{temperatureMax}°</span>/
+          <span style={backgroundColor(temperatureMin)}>{temperatureMin}°</span>
+        </div>
+      )
+    }
+  }
+
   return (
     <section className={`weekly-report weather ${icon}`}>
-      <p className="weekly-report-time">{currentTime()}</p>
-      <p className="weekly-report-temp">
-        <span style={backgroundColor(temperatureMax)}>{temperatureMax}°</span>/
-        <span style={backgroundColor(temperatureMin)}>{temperatureMin}°</span>
-      </p>
+      <div className="weekly-report-time">{currentTime()}</div>
+      <div className="weekly-report-temp">
+        {temperatureReading()}
+      </div>
     </section>
   )
 }

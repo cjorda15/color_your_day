@@ -46,14 +46,16 @@ class App extends Component{
   weeklyReport(){
   const { weather } = this.props
     if(!weather)return null
-    const data = weather.daily.data.length===1?weather.hourly.data:weather.daily.data
+    let data = weather.daily.data.length===1?weather.hourly.data:weather.daily.data
+    data = data[0].temperature?data.filter((v,i) => i%3==0) :data
     return  data.map((data,i) => {
       return (
       <WeeklyReport
         summary={data.summary}
-        icon ={data.icon}
-        temperatureMin = {data.temperatureMin}
-        temperatureMax = {data.temperatureMax}
+        icon={data.icon}
+        tempertatureHourly={data.temperature}
+        temperatureMin={data.temperatureMin}
+        temperatureMax={data.temperatureMax}
         time={data.time}
         key={i}
         />
