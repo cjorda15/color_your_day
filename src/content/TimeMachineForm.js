@@ -60,17 +60,16 @@ class TimeMachineForm extends Component{
     return(
       <div className="time-machine-form-container">
         <div id="time-machine-intro">
-          <span className="tm-input-word" id="tm-input-word-1">or</span>
+          <span className="tm-input-word" id="tm-input-word-1">Pick</span>
+          <span className="tm-input-word" id="tm-input-word-3">another</span>
+          <span className="tm-input-word" id="tm-input-word-4">day</span>
+          <span className="tm-input-word" id="tm-input-word-5">to</span>
           <span  id="title-char-1">c</span>
           <span  id="title-char-2">o</span>
           <span  id="title-char-3">l</span>
           <span  id="title-char-4">o</span>
           <span  id="title-char-5">r</span>
-          <span className="tm-input-word" id="tm-input-word-3">a</span>
-          <span className="tm-input-word" id="tm-input-word-4">previous</span>
-          <span className="tm-input-word" id="tm-input-word-5">day</span>
           <span className="tm-input-word" id="tm-input-word-6">by</span>
-          <span className="tm-input-word" id="tm-input-word-7">given</span>
           <span className="tm-input-word" id="tm-input-word-8">date</span>
         </div>
         <form className="input-location-form">

@@ -1,0 +1,17 @@
+.weather-report{
+  background-size: cover;
+  border-radius: 30px;
+  padding: 8px;
+}
+
+.weather-report-time, .weekly-report-temp{
+  align-items: center;
+  display: flex;
+  font-size: 1.3em;
+  justify-content: center;
+}
+
+.weather-report-time{
+  color: #6A5ACD;
+  text-shadow: 1px 1px 1px #ADFF2F;
+}

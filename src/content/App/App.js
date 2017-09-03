@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import TimeMachineForm from '../TimeMachineForm'
 import WeatherMap from '../WeatherMap'
 import WeatherInfo from '../WeatherInfo'
-import WeeklyReport from '../WeeklyReport'
+import WeatherReport from '../WeatherReport'
 import WeatherAnimation from '../WeatherAnimation'
 import darkSkyApiCall from '../../helper/darkSkyApiCall'
 const geocoder = require('geocoder')
@@ -50,8 +50,7 @@ class App extends Component{
     data = data[0].temperature?data.filter((v,i) => i%3==0) :data
     return  data.map((data,i) => {
       return (
-      <WeeklyReport
-        summary={data.summary}
+      <WeatherReport
         icon={data.icon}
         tempertatureHourly={data.temperature}
         temperatureMin={data.temperatureMin}

@@ -19,17 +19,18 @@ class WeatherAnimation extends Component{
     }
     return "RAIN"
   }
+
   updateColor(){
     if(this.props.icon){
       switch(this.props.icon){
         case 'clear-day':
           return  '#f4eb42'
         case 'partly-cloudy-day':
-          return  '#cfb7ff'
+          return  '#F3C87A'
         case 'cloudy':
-          return  '#d3f6ff'
+          return  '#037172'
         case 'wind':
-          return  '#ffe7d3'
+          return  '#037172'
         case 'fog':
           return  '#d3ffdd'
         case 'partly-cloudy-night':
