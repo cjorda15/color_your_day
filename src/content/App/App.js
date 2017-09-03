@@ -31,7 +31,7 @@ class App extends Component{
 
  getLocation(lat,lng){
    geocoder.reverseGeocode( lat, lng, ( err, data ) => {
-    const {formatted_address} = data.results[0]
+    const {formatted_address} = data.results[2]||data.results[0]
     this.props.handleLocation(formatted_address)
   });
  }
@@ -40,7 +40,7 @@ class App extends Component{
   return  this.props.weather?
       this.props.weather.currently.icon
         :
-      "clear-day"
+      'clear-day'
    }
 
   weeklyReport(){
@@ -64,25 +64,25 @@ class App extends Component{
 
   render(){
     return(
-      <div className={this.handleBackground()+ " weather app-container"}>
-        <h3 className="title-greeting">
-          <span id="title-char-1">c</span>
-          <span id="title-char-2">o</span>
-          <span id="title-char-3">l</span>
-          <span id="title-char-4">o</span>
-          <span id="title-char-5">r</span>
-          <span id="title-word-2">your</span>
-          <span id="title-word-3">day</span>
+      <div className={this.handleBackground()+ ' weather app-container'}>
+        <h3 className='title-greeting'>
+          <span id='title-char-1'>c</span>
+          <span id='title-char-2'>o</span>
+          <span id='title-char-3'>l</span>
+          <span id='title-char-4'>o</span>
+          <span id='title-char-5'>r</span>
+          <span id='title-word-2'>your</span>
+          <span id='title-word-3'>day</span>
         </h3>
         <WeatherMap
-          id="weather-map"
+          id='weather-map'
           handleApiCall={this.apiCall.bind(this)}
          />
-        <p id="location-content">{this.props.location?this.props.location:null}</p>
+        <p id='location-content'>{this.props.location?this.props.location:null}</p>
         <WeatherInfo
           weather={this.props.weather}
          />
-        <div id="central-container">
+        <div id='central-container'>
           {this.props.weather?
           <WeatherAnimation
             icon={this.props.weather.currently.icon}

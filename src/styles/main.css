@@ -2,8 +2,8 @@
 @import url('timeMachineInput.css');
 @import url('weatherInfo.css');
 @import url('backgroundAnimation.css');
-@import url('WeatherReport.css');
-
+@import url('weatherReport.css');
+@import url('weatherMap.css');
 *{
   box-sizing: border-box;
   padding: 0px;
@@ -26,13 +26,4 @@ body {
 
 #root{
   height: 300vh;
-}
-
-.Map-wrapper {
-  height: 400px;
-  width: 100%;
-}
-
-.mapboxgl-canvas{
-  height: 400px !important;
 }

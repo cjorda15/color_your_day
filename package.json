@@ -38,7 +38,6 @@
     "moment": "^2.18.1",
     "node-fetch": "^1.7.2",
     "node-sass": "^4.5.3",
-    "only": "0.0.2",
     "path": "^0.12.7",
     "react": "^15.6.1",
     "react-animated-weather": "^1.0.3",
@@ -63,7 +62,7 @@
     "jest-css-modules": "^1.1.0",
     "jsdom": "^11.2.0",
     "mocha": "^3.5.0",
-    "sinon": "^3.2.1"
+    "only": "0.0.2"
   },
   "scripts": {
     "test": "jest",

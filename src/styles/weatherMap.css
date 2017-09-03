@@ -1,0 +1,36 @@
+.Map-wrapper {
+  height: 400px;
+  width: 100%;
+}
+
+.mapboxgl-canvas{
+  height: 400px !important;
+  z-index: 4;
+}
+
+.mapboxgl-ctrl-top-right{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.mapboxgl-ctrl-geocoder{
+  height: 40px;
+}
+
+#map-tip{
+  background: #fff;
+  border-radius: 20px;
+  bottom: 0;
+  color: #ff0000;
+  font-size: 1.5em;
+  padding: 3px;
+  position: absolute;
+  left: 25%;
+  z-index: 5;
+}
+
+.weather-map-container{
+  height: 400px;
+  position: relative;
+}

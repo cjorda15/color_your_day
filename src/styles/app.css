@@ -11,6 +11,7 @@
   min-width: 150px;
   max-width: 500px;
   width: 30%;
+  z-index: 4;
 }
 
 
@@ -60,32 +61,6 @@
   color:#ADFF2F;
 }
 
-.mapboxgl-ctrl-top-right{
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.mapboxgl-ctrl-geocoder{
-  height: 40px;
-}
-
-#map-tip{
-  background: #fff;
-  border-radius: 20px;
-  bottom: 0;
-  color: #ff0000;
-  font-size: 1.5em;
-  padding: 3px;
-  position: absolute;
-  left: 25%;
-  z-index: 5;
-}
-
-.weather-map-container{
-  height: 400px;
-  position: relative;
-}
 
 #location-content{
 text-shadow: 2px 2px 6px lightseagreen
