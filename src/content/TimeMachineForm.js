@@ -73,19 +73,19 @@ class TimeMachineForm extends Component{
           <span className="tm-input-word" id="tm-input-word-8">date</span>
         </div>
         <form className="input-location-form">
-          <div className="input-form-container">
-            <DatePicker
-              showMonthDropdown
-              showYearDropdown
-              placeholderText="Click to select a date"
-              selected={this.state.stateDate}
-              onChange={this.handleChange.bind(this)}
-              />
-           </div>
-           <PlacesAutocomplete inputProps={inputProps} />
-          <button onClick={(e)=>{this.handleSubmit(e)}}>submit</button>
-          </form>
-          {this.errorMessage()}
+         <div className="input-form-container">
+          <DatePicker
+            showMonthDropdown
+            showYearDropdown
+            placeholderText="Click to select a date"
+            selected={this.state.stateDate}
+            onChange={this.handleChange.bind(this)}
+            />
+          </div>
+        <PlacesAutocomplete inputProps={inputProps} />
+        <button onClick={(e)=>{this.handleSubmit(e)}}>submit</button>
+       </form>
+       {this.errorMessage()}
       </div>
     )
   }
