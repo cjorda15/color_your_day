@@ -36,6 +36,7 @@
     "leaflet": "^1.2.0",
     "mapbox-gl": "^0.39.1",
     "moment": "^2.18.1",
+    "moment-timezone": "^0.5.13",
     "node-fetch": "^1.7.2",
     "node-sass": "^4.5.3",
     "path": "^0.12.7",
