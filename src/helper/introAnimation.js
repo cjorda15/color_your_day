@@ -20,9 +20,9 @@ const animation3 = () => {
 
 const runAnimation = () => {
 
-  setTimeout(()=>{animation1()},750)
-  setTimeout(()=>{animation2()},1500)
-  setTimeout(()=>{animation3()},2250)
+  setTimeout(()=>{animation1()},1000)
+  setTimeout(()=>{animation2()},2000)
+  setTimeout(()=>{animation3()},3000)
 }
 
 $(document).ready(runAnimation())
