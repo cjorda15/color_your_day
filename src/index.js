@@ -13,3 +13,6 @@ ReactDOM.render(
   </Provider>  ,
   document.getElementById('root')
 )
+
+
+console.log(MAP_API_KEY,"!!@#@");

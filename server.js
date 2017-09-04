@@ -4,7 +4,6 @@ const fetch = require('node-fetch');
 const bodyParser = require('body-parser');
 const port = process.env.PORT ||3000
 const routes = require('./routes/index.js')
-
 require('dotenv').config()
 
 app.use(bodyParser.json());

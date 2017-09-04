@@ -6,16 +6,13 @@ const animation1 = () => {
   $intro.removeClass('snow')
   $intro.text("2")
   setTimeout(()=>{animation2()},1000)
-
 }
 
 const animation2 = () => {
   const $intro = $('#intro-announcement')
-  // $intro.addClass('cloudy-day')
   $intro.removeClass('rain')
   $intro.text("1")
   setTimeout(()=>{animation3()},1000)
-
  }
 
 const animation3 = () => {
@@ -23,10 +20,7 @@ const animation3 = () => {
  }
 
 const runAnimation = () => {
-
   setTimeout(()=>{animation1()},1000)
-  // setTimeout(()=>{animation2()},2000)
-  // setTimeout(()=>{animation3()},3000)
 }
 
 $(document).ready(runAnimation())
