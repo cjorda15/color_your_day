@@ -66,7 +66,7 @@ class App extends Component{
   render(){
     return(
       <div className={this.handleBackground()+ ' weather app-container'}>
-        <div id="intro-announcement" className="weather snow">READY</div>
+        <div id="intro-announcement" className="weather snow">3</div>
        <div className="app-content-wrapper">
         <h3 className='title-greeting'>
           <span className='color-char-1'>c</span>

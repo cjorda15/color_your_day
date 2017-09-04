@@ -4,14 +4,14 @@ const animation1 = () => {
   const $intro = $('#intro-announcement')
   $intro.addClass('rain')
   $intro.removeClass('snow')
-  $intro.text("set")
+  $intro.text("2")
 }
 
 const animation2 = () => {
   const $intro = $('#intro-announcement')
   $intro.addClass('cloudy-day')
   $intro.removeClass('rain')
-  $intro.text("color")
+  $intro.text("1")
  }
 
 const animation3 = () => {
