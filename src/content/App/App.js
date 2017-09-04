@@ -5,7 +5,7 @@ import WeatherInfo from '../WeatherInfo'
 import WeatherReport from '../WeatherReport'
 import WeatherLogo from '../WeatherLogo'
 import darkSkyApiCall from '../../helper/darkSkyApiCall'
-import SimpleLineChart  from '../Chart'
+import Chart  from '../Chart'
 // import '../../helper/introAnimation.js'
 const geocoder = require('geocoder')
 
@@ -95,8 +95,8 @@ class App extends Component{
             {this.weeklyReport()}
             </div>
             <div className="chart-container">
-            {this.props.weather?<SimpleLineChart hourly={this.props.weather.hourly} type={"temperature"}/>:null}
-            {this.props.weather?<SimpleLineChart hourly={this.props.weather.hourly} type={"precipProbability"}/>:null}
+            {this.props.weather?<Chart hourly={this.props.weather.hourly} type={"temperature"}/>:null}
+            {this.props.weather?<Chart hourly={this.props.weather.hourly} type={"precipProbability"}/>:null}
             </div>
          </section>
          <TimeMachineForm handleCall={this.apiCall.bind(this)}/>
