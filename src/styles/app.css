@@ -2,6 +2,11 @@
   height: 100%;
 }
 
+.app-content-wrapper{
+  margin: 0px auto;
+  max-width: 1200px;
+}
+
 #central-container{
   display: flex;
   justify-content: space-between;
@@ -33,23 +38,23 @@
 }
 
 
-#title-char-1{
-  color: #DA70D6;
+.color-char-1{
+  color: #6A5ACD;
 }
 
-#title-char-2{
+.color-char-2{
   color:#DB7093;
 }
 
-#title-char-3{
+.color-char-3{
   color:#87CEFA;
 }
 
-#title-char-4{
+.color-char-4{
   color:#FFA500;
 }
 
-#title-char-5{
+.color-char-5{
   color:#DA70D6;
 }
 
@@ -63,7 +68,16 @@
 
 
 #location-content{
-text-shadow: 2px 2px 6px lightseagreen
+text-shadow: 2px 2px 6px lightseagreen;
+}
+
+#intro-announcement{
+  color: #fff; 
+  height: 100%;
+  width: 100%;
+  font-size: 123px;
+  text-align: center;
+  z-index: 20;
 }
 
 @keyframes icons {

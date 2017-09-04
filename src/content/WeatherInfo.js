@@ -5,7 +5,7 @@ const WeatherInfo = ({weather}) => {
     <div className="weather-info-container">
       <div className="weather-info-content">
         <p className="weather-info-details"> {weather?"Currently "+ weather.currently.summary:null}</p>
-        <p className="weather-info-details"> {weather?"Later "+ weather.hourly.summary:null}</p>
+        <p className="weather-info-details"> {weather?weather.hourly.summary:null}</p>
       </div>
       <div className="weather-info-content">
         <p className="weather-info-details"> {weather?"Temp: "+ weather.currently.apparentTemperature+"°":null}</p>

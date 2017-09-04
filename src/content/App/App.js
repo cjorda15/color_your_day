@@ -3,8 +3,9 @@ import TimeMachineForm from '../TimeMachineForm'
 import WeatherMap from '../WeatherMap'
 import WeatherInfo from '../WeatherInfo'
 import WeatherReport from '../WeatherReport'
-import WeatherAnimation from '../WeatherAnimation'
+import WeatherLogo from '../WeatherLogo'
 import darkSkyApiCall from '../../helper/darkSkyApiCall'
+import '../../helper/introAnimation.js'
 const geocoder = require('geocoder')
 
 class App extends Component{
@@ -30,7 +31,7 @@ class App extends Component{
  }
 
  getLocation(lat,lng){
-   geocoder.reverseGeocode( lat, lng, ( err, data ) => {
+    geocoder.reverseGeocode( lat, lng, ( err, data ) => {
     const {formatted_address} = data.results[2]||data.results[0]
     this.props.handleLocation(formatted_address)
   });
@@ -65,31 +66,34 @@ class App extends Component{
   render(){
     return(
       <div className={this.handleBackground()+ ' weather app-container'}>
+        <div id="intro-announcement" className="weather snow">READY</div>
+       <div className="app-content-wrapper">
         <h3 className='title-greeting'>
-          <span id='title-char-1'>c</span>
-          <span id='title-char-2'>o</span>
-          <span id='title-char-3'>l</span>
-          <span id='title-char-4'>o</span>
-          <span id='title-char-5'>r</span>
+          <span className='color-char-1'>c</span>
+          <span className='color-char-2'>o</span>
+          <span className='color-char-3'>l</span>
+          <span className='color-char-4'>o</span>
+          <span className='color-char-5'>r</span>
           <span id='title-word-2'>your</span>
           <span id='title-word-3'>day</span>
         </h3>
         <WeatherMap
           id='weather-map'
           handleApiCall={this.apiCall.bind(this)}
-         />
-        <p id='location-content'>{this.props.location?this.props.location:null}</p>
-        <WeatherInfo
+          />
+         <p id='location-content'>{this.props.location?this.props.location:null}</p>
+         <WeatherInfo
           weather={this.props.weather}
          />
-        <div id='central-container'>
+         <div id='central-container'>
           {this.props.weather?
-          <WeatherAnimation
+          <WeatherLogo
             icon={this.props.weather.currently.icon}
            />:null}
           {this.weeklyReport()}
+         </div>
+         <TimeMachineForm handleCall={this.apiCall.bind(this)}/>
         </div>
-        <TimeMachineForm handleCall={this.apiCall.bind(this)}/>
       </div>
     )
   }

@@ -1,4 +1,4 @@
-import {shallow,mount,render} from 'enzyme'
+import { shallow } from 'enzyme'
 import React from 'react';
 import TimeMachineForm from '../src/content/TimeMachineForm'
 import { expect } from 'chai'

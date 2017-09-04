@@ -64,11 +64,11 @@ class TimeMachineForm extends Component{
           <span className="tm-input-word" id="tm-input-word-3">another</span>
           <span className="tm-input-word" id="tm-input-word-4">day</span>
           <span className="tm-input-word" id="tm-input-word-5">to</span>
-          <span  id="title-char-1">c</span>
-          <span  id="title-char-2">o</span>
-          <span  id="title-char-3">l</span>
-          <span  id="title-char-4">o</span>
-          <span  id="title-char-5">r</span>
+          <span className="color-char-1">c</span>
+          <span className="color-char-2">o</span>
+          <span className="color-char-3">l</span>
+          <span className="color-char-4">o</span>
+          <span className="color-char-5">r</span>
           <span className="tm-input-word" id="tm-input-word-6">by</span>
           <span className="tm-input-word" id="tm-input-word-8">date</span>
         </div>

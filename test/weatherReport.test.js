@@ -1,4 +1,4 @@
-import {shallow,mount,render} from 'enzyme'
+import {shallow} from 'enzyme'
 import React from 'react';
 import WeatherReport from '../src/content/WeatherReport'
 import { expect } from 'chai'
