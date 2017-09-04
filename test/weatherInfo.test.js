@@ -19,7 +19,7 @@ describe('WeatherInfo test', () => {
 
   it('should have content that is dependent on props passed to it',() => {
     const content = wrapper.first(".weather-info-details").text()
-    const expected = ' Currently sunny Later very hot Temp: 56° Wind Speed: 22'
+    const expected = ' Currently sunny very hot Temp: 56° Wind Speed: 22'
     expect(content).equal(expected)
   })
 })

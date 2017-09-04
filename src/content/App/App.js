@@ -5,7 +5,8 @@ import WeatherInfo from '../WeatherInfo'
 import WeatherReport from '../WeatherReport'
 import WeatherLogo from '../WeatherLogo'
 import darkSkyApiCall from '../../helper/darkSkyApiCall'
-import '../../helper/introAnimation.js'
+import SimpleLineChart  from '../Chart'
+// import '../../helper/introAnimation.js'
 const geocoder = require('geocoder')
 
 class App extends Component{
@@ -63,10 +64,11 @@ class App extends Component{
     })
   }
 
+  // {this.props.weather?<SimpleLineChart weather={this.props.weather.hourly}/>:null}
+  // <div id="intro-announcement" className="weather snow">3</div>
   render(){
     return(
       <div className={this.handleBackground()+ ' weather app-container'}>
-        <div id="intro-announcement" className="weather snow">3</div>
        <div className="app-content-wrapper">
         <h3 className='title-greeting'>
           <span className='color-char-1'>c</span>
@@ -85,13 +87,19 @@ class App extends Component{
          <WeatherInfo
           weather={this.props.weather}
          />
+         <section className="weather-summary-container">
          <div id='central-container'>
           {this.props.weather?
           <WeatherLogo
             icon={this.props.weather.currently.icon}
            />:null}
-          {this.weeklyReport()}
-         </div>
+            {this.weeklyReport()}
+            </div>
+            <div className="chart-container">
+            {this.props.weather?<SimpleLineChart hourly={this.props.weather.hourly} type={"temperature"}/>:null}
+            {this.props.weather?<SimpleLineChart hourly={this.props.weather.hourly} type={"precipProbability"}/>:null}
+            </div>
+         </section>
          <TimeMachineForm handleCall={this.apiCall.bind(this)}/>
         </div>
       </div>

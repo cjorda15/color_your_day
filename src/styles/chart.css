@@ -1,0 +1,25 @@
+.chart-container{
+  display: flex;
+  flex-direction: column;
+}
+
+.recharts-surface{
+  background: rgba(256,256,256,0.8);
+}
+
+.weather-summary-container{
+  display: flex;
+  justify-content: space-between;
+}
+
+.recharts-wrapper{
+  margin-top: 5px;
+}
+
+
+@media (max-width:520px){
+  .weather-summary-container{
+    align-items: center;
+    flex-direction: column;
+  }
+}

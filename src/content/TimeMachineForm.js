@@ -76,7 +76,6 @@ class TimeMachineForm extends Component{
          <div className="input-form-container">
           <DatePicker
             showMonthDropdown
-            showYearDropdown
             placeholderText="Click to select a date"
             selected={this.state.stateDate}
             onChange={this.handleChange.bind(this)}

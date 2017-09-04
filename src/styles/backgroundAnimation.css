@@ -2,8 +2,12 @@
   background-color: #6495ed !important;
 }
 
-.partly-cloudy-day, .wind{
+.partly-cloudy-day{
   background-color: #96beff !important;
+}
+
+.wind{
+  background-color: #CDCCC9 !important;
 }
 
 .cloudy {
