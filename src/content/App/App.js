@@ -6,7 +6,7 @@ import WeatherReport from '../WeatherReport'
 import WeatherLogo from '../WeatherLogo'
 import darkSkyApiCall from '../../helper/darkSkyApiCall'
 import SimpleLineChart  from '../Chart'
-import '../../helper/introAnimation.js'
+// import '../../helper/introAnimation.js'
 const geocoder = require('geocoder')
 
 class App extends Component{
@@ -64,10 +64,10 @@ class App extends Component{
     })
   }
 
+  // <div id="intro-announcement" className="weather snow">3</div>
   render(){
     return(
       <div className={this.handleBackground()+ ' weather app-container'}>
-      <div id="intro-announcement" className="weather snow">3</div>
        <div className="app-content-wrapper">
         <h3 className='title-greeting'>
           <span className='color-char-1'>c</span>
