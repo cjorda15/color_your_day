@@ -1,5 +1,6 @@
 .chart-container{
   display: flex;
+  margin: 0px 10px;
   flex-direction: column;
 }
 
@@ -9,7 +10,9 @@
 
 .weather-summary-container{
   display: flex;
+  margin: 0px auto;
   justify-content: space-between;
+  width: 95%;
 }
 
 .recharts-wrapper{
