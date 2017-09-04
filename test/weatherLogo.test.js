@@ -2,7 +2,6 @@ import {shallow} from 'enzyme'
 import React from 'react';
 import WeatherLogo from '../src/content/WeatherLogo'
 import { expect } from 'chai'
-import WeatherMap from '../src/content/WeatherMap'
 
 describe('WeatherLogo test', () => {
   const weather = {currently:{
@@ -23,10 +22,4 @@ describe('WeatherLogo test', () => {
     const expected = { icon: 'RAIN', color: 'blue', size: 100, animate: true }
     expect(wrapper.state()).eql(expected)
   })
-})
-
-
-describe('ddd',()=>{
-  const me = shallow(<WeatherMap/>)
-
 })

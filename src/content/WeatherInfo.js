@@ -13,6 +13,6 @@ const WeatherInfo = ({weather}) => {
       </div>
     </div>
   )
-}
+};
 
-export default WeatherInfo
+export default WeatherInfo;

@@ -18,7 +18,6 @@
   z-index: 4;
 }
 
-
 #central-container canvas{
   animation: icons 30s infinite;
   position: absolute;

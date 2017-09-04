@@ -1,8 +1,8 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import moment from 'moment';
-import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
+import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 
 class TimeMachineForm extends Component{
   constructor(props){
@@ -20,22 +20,22 @@ class TimeMachineForm extends Component{
  }
 
   handleInput(input,type){
-     this.setState({[type]:input})
+     this.setState({[type]:input});
   }
 
   handleError(){
-    this.setState({showError:true})
-    setTimeout(()=>{this.setState({showError:false})},2000)
+    this.setState({showError:true});
+    setTimeout(()=>{this.setState({showError:false})},2000);
   }
 
   handleSubmit(e){
-    e.preventDefault()
-    const {address,stateDate} = this.state
-    const date = stateDate.utc().format().slice(0,10)
+    e.preventDefault();
+    const {address,stateDate} = this.state;
+    const date = stateDate.utc().format().slice(0,10);
     const dateTime = Math.floor(new Date(date)/1000);
 
     if(!address||!stateDate){
-      this.handleError()
+      this.handleError();
       return
     }
 
@@ -48,7 +48,7 @@ class TimeMachineForm extends Component{
   errorMessage(){
     if(this.state.showError){
      return <div className="error-message">error, need all input fields filled out</div>
-   }
+   };
   }
 
   render(){

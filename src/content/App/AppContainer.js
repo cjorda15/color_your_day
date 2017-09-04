@@ -1,12 +1,12 @@
-import { connect } from 'react-redux'
-import { updateWeather, updateLocation } from '../../actions'
-import App from './App'
+import { connect } from 'react-redux';
+import { updateWeather, updateLocation } from '../../actions';
+import App from './App';
 const mapStateToProps = (state) => {
   return {
     weather:state.weather,
     location:state.location
-  }
-}
+  };
+};
 const mapDispatchToProps = (dispatch) => {
   return {
     handleUpdateWeather: (input) => {
@@ -15,7 +15,7 @@ const mapDispatchToProps = (dispatch) => {
     handleLocation: (input) => {
       dispatch(updateLocation(input))
     }
- }
-}
+ };
+};
 
-export default connect(mapStateToProps,mapDispatchToProps) (App)
+export default connect(mapStateToProps,mapDispatchToProps) (App);

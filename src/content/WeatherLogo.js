@@ -16,34 +16,34 @@ class WeatherLogo extends Component{
     if(this.props.icon){
       return this.props.icon.toUpperCase().split('')
              .map(char => char=="-"?"_":char).join('')
-    }
-    return "RAIN"
+    };
+    return "RAIN";
   }
 
   updateColor(){
     if(this.props.icon){
       switch(this.props.icon){
         case 'clear-day':
-          return  '#f4eb42'
+          return  '#f4eb42';
         case 'partly-cloudy-day':
-          return  '#F3C87A'
+          return  '#F3C87A';
         case 'cloudy':
-          return  '#037172'
+          return  '#037172';
         case 'wind':
-          return  '#037172'
+          return  '#037172';
         case 'fog':
-          return  '#d3ffdd'
+          return  '#d3ffdd';
         case 'partly-cloudy-night':
-          return  '#86d8ae'
+          return  '#86d8ae';
         case 'rain':
-          return  '#3751d3'
+          return  '#3751d3';
         case 'snow':
-          return  '#3751d3'
+          return  '#3751d3';
         default:
-          return '#3751d3'
+          return '#3751d3';
       }
   }
-    return "#3751d3"
+    return "#3751d3";
   }
 
     render(){

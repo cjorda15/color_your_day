@@ -5,6 +5,7 @@
 @import url('weatherReport.css');
 @import url('weatherMap.css');
 @import url('chart.css');
+
 *{
   box-sizing: border-box;
   padding: 0px;

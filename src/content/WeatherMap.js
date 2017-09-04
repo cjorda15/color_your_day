@@ -27,35 +27,6 @@ class WeatherMap extends Component {
         accessToken: mapboxgl.accessToken
     }));
 
-    map.on('load', function() {
-      const imgSrc = 'https://cdn.dribbble.com/assets/icon-shotstat-like-6a1e9e9db48b9b788639f05a658379b7bb027a75d256127f812bf9392664396f.png'
-      map.loadImage(imgSrc, function(error, image) {
-        if(error) throw error;
-        map.addImage('compass', image);
-        map.addLayer({
-          "id": "points",
-          "type": "symbol",
-          "source": {
-            "type": "geojson",
-            "data": {
-              "type": "FeatureCollection",
-              "features": [{
-                "type": "Feature",
-                "geometry": {
-                  "type": "Point",
-                  "coordinates": [lng, lat]
-                }
-              }]
-            }
-          },
-          "layout": {
-            "icon-image": "compass",
-            "icon-size": .6
-          }
-        });
-      });
-    });
-
     map.on('move', () => {
       const { lat, lng } = map.getCenter();
 

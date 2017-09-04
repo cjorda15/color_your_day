@@ -1,13 +1,13 @@
-import React, { Component } from 'react'
-import TimeMachineForm from '../TimeMachineForm'
-import WeatherMap from '../WeatherMap'
-import WeatherInfo from '../WeatherInfo'
-import WeatherReport from '../WeatherReport'
-import WeatherLogo from '../WeatherLogo'
-import darkSkyApiCall from '../../helper/darkSkyApiCall'
-import Chart  from '../Chart'
+import React, { Component } from 'react';
+import TimeMachineForm from '../TimeMachineForm';
+import WeatherMap from '../WeatherMap';
+import WeatherInfo from '../WeatherInfo';
+import WeatherReport from '../WeatherReport';
+import WeatherLogo from '../WeatherLogo';
+import darkSkyApiCall from '../../helper/darkSkyApiCall';
+import Chart  from '../Chart';
+import geocoder from 'geocoder';
 // import '../../helper/introAnimation.js'
-const geocoder = require('geocoder')
 
 class App extends Component{
   constructor(props){
@@ -19,8 +19,8 @@ class App extends Component{
   }
 
   componentDidMount(){
-    const {lat,lng} = this.state
-    this.apiCall(lat, lng)
+    const {lat,lng} = this.state;
+    this.apiCall(lat, lng);
   }
 
   apiCall(lat,lng,time){
@@ -28,7 +28,7 @@ class App extends Component{
                     this.props.handleUpdateWeather.bind(this),
                     this.getLocation.bind(this),
                     this.setState.bind(this)
-                  )
+                  );
  }
 
  getLocation(lat,lng){
@@ -42,14 +42,14 @@ class App extends Component{
   return  this.props.weather?
       this.props.weather.currently.icon
         :
-      'clear-day'
+      'clear-day';
    }
 
   weeklyReport(){
-  const { weather } = this.props
-    if(!weather)return null
-    let data = weather.daily.data.length===1?weather.hourly.data:weather.daily.data
-    data = data[0].temperature?data.filter((v,i) => i%3==0) :data
+  const { weather } = this.props;
+    if(!weather)return null;
+    let data = weather.daily.data.length===1?weather.hourly.data:weather.daily.data;
+    data = data[0].temperature?data.filter((v,i) => i%3==0) :data;
     return  data.map((data,i) => {
       return (
       <WeatherReport
@@ -60,12 +60,12 @@ class App extends Component{
         time={data.time}
         key={i}
         />
-      )
+      );
     })
   }
 
   renderChart(type){
-    if(!this.props.weather) return ;
+    if(!this.props.weather) return;
     return(
     <Chart
     hourly={this.props.weather.hourly}

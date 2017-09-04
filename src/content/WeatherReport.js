@@ -5,10 +5,10 @@ const WeatherReport = ({summary,icon,temperatureMin,temperatureMax,time,temperta
   const date = new Date(time*1000);
   let hours = date.getHours();
   const currentTime = () => {
-  return  tempertatureHourly?
-          moment.unix(time).format("HH:mm")
-            :
-          moment.unix(time).format("MM/DD/YYYY");
+    return  tempertatureHourly?
+            moment.unix(time).format("HH:mm")
+              :
+            moment.unix(time).format("MM/DD/YYYY");
   }
 
   const backgroundColor = (input) => {
@@ -25,10 +25,11 @@ const WeatherReport = ({summary,icon,temperatureMin,temperatureMax,time,temperta
 
   const temperatureReading = () => {
     if(tempertatureHourly){
-      return (<span className="daily-temperature-reading"
-              style={backgroundColor(tempertatureHourly)}>
-              {tempertatureHourly}°
-            </span>
+      return (<span
+                className="daily-temperature-reading"
+                style={backgroundColor(tempertatureHourly)}>
+                {tempertatureHourly}°
+              </span>
           )
     }else{
       return(
