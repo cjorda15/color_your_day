@@ -16,11 +16,11 @@ const Chart = ({hourly,type}) =>{
     if(type=="precipProbability") return '#8884d8';
     const data = configData();
     const total = data.reduce((acc,data) => {
-      acc+=data.temperature
-      return acc
-    },0)
-    const hours = data.length
-    return tempertatureColor(total/hours,"chart")
+      acc+=data.temperature;
+      return acc;
+    },0);
+    const hours = data.length;
+    return tempertatureColor(total/hours,"chart");
   };
 
   const tempertatureColor = (input,type) => {
@@ -31,8 +31,8 @@ const Chart = ({hourly,type}) =>{
         else if(input<70) color ='#F19969';
         else if(input<80) color ='#FF6700';
         else if(input<90) color ='#CC2200';
-        else color = '#860102'
-      return color
+        else color = '#860102';
+      return color;
   }
 
   	return (
@@ -48,4 +48,4 @@ const Chart = ({hourly,type}) =>{
     );
 }
 
-export default Chart
+export default Chart;

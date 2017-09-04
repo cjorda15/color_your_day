@@ -10,6 +10,6 @@ const weather = (req, res) => {
     .then(blob => blob.json())
     .then(data => { res.send(data)})
     .catch(err => console.log(err))
-}
+};
 
-module.exports = weather
+module.exports = weather;

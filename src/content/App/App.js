@@ -63,18 +63,19 @@ class App extends Component{
       )
     })
   }
-//
+
   renderChart(type){
-    if(!this.props.weather) return
+    if(!this.props.weather) return ;
     return(
     <Chart
     hourly={this.props.weather.hourly}
     type={type}/>
-   )
-  }
+  );
+}
 
   render(){
     const {location, weather} = this.props
+
     return(
       <div className={this.handleBackground()+ ' weather app-container'}>
        <div className="app-content-wrapper">
@@ -91,21 +92,18 @@ class App extends Component{
           id='weather-map'
           handleApiCall={this.apiCall.bind(this)}
           />
-         <p id='location-content'>{this.props.location?this.props.location:null}</p>
-         <WeatherInfo
-          weather={this.props.weather}
+        <p id='location-content'>{location?location:null}</p>
+        <WeatherInfo
+          weather={weather}
          />
          <section className="weather-summary-container">
-         <div id='central-container'>
-          {this.props.weather?
-          <WeatherLogo
-            icon={this.props.weather.currently.icon}
-           />:null}
+          <div id='central-container'>
+           {weather?<WeatherLogo icon={weather.currently.icon}/>:null}
             {this.weeklyReport()}
-            </div>
-            <div className="chart-container">
-            {this.renderChart("temperature")}
-            {this.renderChart("precipProbability")}
+          </div>
+          <div className="chart-container">
+           {this.renderChart("temperature")}
+           {this.renderChart("precipProbability")}
           </div>
          </section>
          <TimeMachineForm handleCall={this.apiCall.bind(this)}/>

@@ -7,9 +7,14 @@
 ## installation
 
 `git clone git@github.com:cjorda15/color_your_day.git`<br/>
+<br/>
 `cd color_your_day`<br/>
+<br/>
 `npm install`<br/>
+<br/>
 `webpack`<br/>
+<br/>
 `npm start`<br/>
-### check http://localhost:3000/
+<br/>
+### check out localhost:3000/
 ![site img2](https://i.imgur.com/NQjOjgf.png)
