@@ -1,18 +1,21 @@
 import React, { Component } from 'react'
 import {LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'Recharts';
+import moment from 'moment'
 
 const SimpleLineChart = ({hourly,type}) =>{
   const configData = ()=>{
-    const initialSetUp = [{name:'12am'},{name:'8am'},{name:'4pm'},{name:'12 pm'}]
-    return hourly.data.filter((v,i)=>i%8===0&&i<=24).reduce((acc,val,i) => {
-      acc[i][type]=val[type]
-      return acc
-    },initialSetUp)
+     const data= hourly.data.filter((v,i)=>i%2===0&&i<=8).map(val => {
+      let time = moment.unix(val.time).format("HH")
+      time = time<=12? time+"am" : time-12+"pm"
+      return {time:time,[type]:val[type]}
+      })
+    console.log(data);
+    return data
   }
   	return (
-    	<LineChart width={305} height={300} data={configData()}
+    	<LineChart width={310} height={300} data={configData()}
             margin={{top: 5, right: 30, left: 20, bottom: 5}}>
-       <XAxis dataKey="name"/>
+       <XAxis dataKey="time"/>
        <YAxis/>
        <CartesianGrid strokeDasharray="3 3"/>
        <Tooltip/>
