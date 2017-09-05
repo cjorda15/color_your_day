@@ -39,8 +39,6 @@ module.exports = {
     new webpack.DefinePlugin({
     'MAP_API_KEY': JSON.stringify(process.env.MAP_API_KEY),
     'WEATHER_API_KEY':JSON.stringify(process.env.WEATHER_API_KEY)
-    'GOOGLE_API':JSON.stringify(process.env.GOOGLE_API)
-
   })
  ]
 }
