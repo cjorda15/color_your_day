@@ -12,7 +12,7 @@ const Chart = ({hourly,type,timezone}) =>{
       })
     return data;
   }
-
+///changes
   const strokeColor = () => {
     if(type=="precipProbability") return '#8884d8';
     const data = configData();
