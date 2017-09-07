@@ -68,6 +68,7 @@ class App extends Component{
     if(!this.props.weather) return;
     return(
     <Chart
+    timezone = {this.props.weather.timezone}
     hourly={this.props.weather.hourly}
     type={type}/>
   );

@@ -16,16 +16,16 @@ class TimeMachineForm extends Component{
   }
 
   handleChange(date) {
-  this.setState({stateDate: date});
+   this.setState({stateDate: date});
  }
 
   handleInput(input,type){
-     this.setState({[type]:input});
+   this.setState({[type]:input});
   }
 
   handleError(){
-    this.setState({showError:true});
-    setTimeout(()=>{this.setState({showError:false})},2000);
+   this.setState({showError:true});
+   setTimeout(()=>{this.setState({showError:false})},2000);
   }
 
   handleSubmit(e){

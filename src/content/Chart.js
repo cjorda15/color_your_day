@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import {LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'Recharts';
-import moment from 'moment';
+import moment from 'moment-timezone';
 
-const Chart = ({hourly,type}) =>{
+const Chart = ({hourly,type,timezone}) =>{
   const configData = ()=>{
      const data= hourly.data.filter((v,i)=>i%2===0&&i<=8).map(val => {
-      let time = moment.unix(val.time).format("HH");
-      time = time<=12? time+"am" : time-12+"pm";
+      let time = moment.unix(val.time)
+      let actualTime = moment.tz(time,timezone).format("HH")
+      time = time<=13? time+"am" : time-12+"pm";
       return {time:time,[type]:val[type]};
       })
     return data;
@@ -18,7 +19,7 @@ const Chart = ({hourly,type}) =>{
     const total = data.reduce((acc,data) => {
       acc+=data.temperature;
       return acc;
-    },0);
+     },0);
     const hours = data.length;
     return tempertatureColor(total/hours,"chart");
   };
